@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    array: [],
+    arrayStops: [],
+    colorKey: [],
+    colorStops: [],
+    currentStop: 0,
+    count: 10,
+    delay: 100,
+    algorithm: '',
+    timeout: [],
+  }
+
+  componentDidMount() {
+    this.generateRandomArray();
+  }
+
+  generateRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  generateRandomArray = () => {
+    const count = this.state.count;
+    const temp = [];
+
+    for (let i=0; i < count; i++){
+      temp.push(this.generateRandomNumber(50, 200));
+    }
+
+    console.log(temp);
+
+  }
+
+  render() {
+    return (
+      <div className="app">
+        <h1>Hello World!</h1>
+      </div>
+    )
+  }
 }
 
 export default App;
