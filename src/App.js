@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import "./App.css";
+import Bar from './components/Bar.js'
 
 class App extends Component {
   state = {
@@ -30,16 +31,31 @@ class App extends Component {
       temp.push(this.generateRandomNumber(50, 200));
     }
 
-    console.log(temp);
-
-  }
+    this.setState({
+      array:temp,
+      arraySteps: [temp],
+    });
+  };
 
   render() {
-    return (
-      <div className="app">
-        <h1>Hello World!</h1>
+    let bars = this.state.array.map((value, index) => {
+      return (
+        <Bar 
+        key={index} 
+        index={index}
+        length={value} 
+        color={0}
+        />
+    );
+    });
+
+    return <div className='app'>
+      <div className = "frame">
+        <div className="barsDiv container card">{bars}</div>
       </div>
-    )
+      <div className="control-pannel"></div>
+      <div className="pannel"></div>
+    </div>
   }
 }
 
