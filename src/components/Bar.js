@@ -14,10 +14,6 @@ function Bar({ index, length, color, changeArray }) {
 		['rgba(131, 232, 90, 0.5)', 'rgba(131, 232, 90, 0.2)'],
 	];
 
-	// const barStyle = {
-	// 	height: length,
-	// };
-
 	const inputStyle = {
 		position: 'relative',
 		top: Math.floor(length / 2) - 12,
@@ -31,7 +27,7 @@ function Bar({ index, length, color, changeArray }) {
 		transform: `translateY(${200 - length}px) rotateX(-90deg)`,
 		backgroundColor: `${colors[color][0]}`,
 		boxShadow: `5px 5px 50px 5px ${colors[color][1]}`,
-		trasistion: '0.3s',
+		transition: '0.3s',
 	};
 
 	const front_back_right_left = {
@@ -39,7 +35,7 @@ function Bar({ index, length, color, changeArray }) {
 		transform: `translateY(${200 - length}px)`,
 		backgroundColor: `${colors[color][0]}`,
 		boxShadow: `5px 5px 50px 5px ${colors[color][1]}`,
-		trasistion: '0.3s',
+		transition: '0.3s',
 	};
 
 	const quantity = {
