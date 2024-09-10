@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import "./App.css";
-import Bar from './components/Bar.js'
+import Bar from './components/Bar.js';
+import Play from '@material-ui/icons/PlayCircleOutlineRounded';
+import Forwards from '@material-ui/icons/SkipNextRounded';
+import Backward from '@material-ui/icons/SkipPreviousRounded';
+import RotateLeft from '@material-ui/icons/RotateLeft';
+import { Forward } from '@material-ui/icons';
 
 class App extends Component {
   state = {
     array: [],
-    arrayStops: [],
+    arraySteps: [],
     colorKey: [],
     colorStops: [],
     currentStop: 0,
@@ -34,8 +39,19 @@ class App extends Component {
     this.setState({
       array:temp,
       arraySteps: [temp],
+      currentStep: 0,
     });
   };
+
+  changeArray = (index, value) => {
+    let arr = this.state.array;
+    arr[index] = value;
+    this.setState({
+      array: arr,
+      arraySteps: [arr],
+      currentStep:0
+    })
+  }
 
   render() {
     let bars = this.state.array.map((value, index) => {
@@ -45,17 +61,46 @@ class App extends Component {
         index={index}
         length={value} 
         color={0}
+        changeArray={this.changeArray}
         />
     );
     });
 
-    return <div className='app'>
-      <div className = "frame">
-        <div className="barsDiv container card">{bars}</div>
+      let playButton;
+
+      if(this.state.arraySteps.length === this.state.currentStep) {
+        playButton = (
+          <button className="controller">
+            <RotateLeft />
+          </button>
+        );
+      } else {
+        playButton = (
+          <button className="controller">
+            <Play />
+          </button>
+        );
+      }
+
+    return (
+      <div className='app'>
+        <div className = "frame">
+          <div className="barsDiv container card">{bars}</div>
+        </div>
+        <div className="control-pannel">
+          <div className="control-buttons">
+            <button className="controller">
+              <Backward />
+            </button>
+            {playButton}
+            <button className="controller">
+              <Forwards />
+            </button>
+          </div>
+        </div>
+        <div className="pannel"></div>
       </div>
-      <div className="control-pannel"></div>
-      <div className="pannel"></div>
-    </div>
+    );
   }
 }
 
