@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import "./App.css";
-
-import BubbleSort from './algorithms/BubbleSort.js'
-
+import BubbleSort from './algorithms/BubbleSort.js';
 import Bar from './components/Bar.js';
 import Play from '@material-ui/icons/PlayCircleOutlineRounded';
 import Forwards from '@material-ui/icons/SkipNextRounded';
@@ -20,6 +18,7 @@ class App extends Component {
     delay: 100,
     algorithm: 'Bubble Sort',
     timeouts: [],
+    changedIndices: [],
   }
 
   ALGORITHMS = {
@@ -43,7 +42,6 @@ class App extends Component {
 
   clearColorKey = () => {
     let blankKey = new Array(this.state.count).fill(0);
-
     this.setState({
       colorKey: blankKey,
       colorSteps: [blankKey]
@@ -55,15 +53,14 @@ class App extends Component {
     this.clearColorKey();
     const count = this.state.count;
     const temp = [];
-
     for (let i = 0; i < count; i++) {
       temp.push(this.generateRandomNumber(50, 200));
     }
-
     this.setState({
       array: temp,
       arraySteps: [temp],
       currentStep: 0,
+      changedIndices: [],
     }, () => {
       this.generateSteps();
     });
@@ -73,7 +70,11 @@ class App extends Component {
     let array = this.state.array.slice();
     let steps = this.state.arraySteps.slice();
     let colorSteps = this.state.colorSteps.slice();
-    this.ALGORITHMS[this.state.algorithm](array, 0, steps, colorSteps);
+
+    // Verificar si ya hay pasos generados
+    if (steps.length > 1) return;  // Evitar generar pasos de nuevo si ya hay más de uno.
+
+    this.ALGORITHMS[this.state.algorithm](array, 0, steps, colorSteps, this.state.changedIndices);
 
     this.setState({
       arraySteps: steps,
@@ -84,11 +85,12 @@ class App extends Component {
   changeArray = (index, value) => {
     let arr = [...this.state.array];
     arr[index] = value;
-    this.setState({
+    this.setState(prevState => ({
       array: arr,
       arraySteps: [arr],
-      currentStep: 0
-    }, () => {
+      currentStep: 0,
+      changedIndices: prevState.changedIndices.includes(index) ? prevState.changedIndices : [...prevState.changedIndices, index]
+    }), () => {
       this.generateSteps();
     });
   }
