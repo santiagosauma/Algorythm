@@ -1,32 +1,38 @@
-import { swap } from './tools'
-
-const BubbleSort = (array, position, arraySteps, colorSteps, changedIndices) => {
-    let colorKey = colorSteps[colorSteps.length - 1].slice();
-
-    for(let i = 0; i < array.length - 1; i++){
-        for (let j = 0; j < array.length - i - 1; j++) {
-            if(array[j] > array[j+1]) {
-                array = swap(array, j, j+1);
-            }
-            arraySteps.push(array.slice());
-            colorKey[j] = 1;
-            colorKey[j + 1] = 1;
-            changedIndices.forEach(index => {
-                colorKey[index] = 3;
-            });
-            colorSteps.push(colorKey.slice());
-            colorKey[j] = 0;
-            colorKey[j + 1] = 0;
-            changedIndices.forEach(index => {
-                colorKey[index] = 3;
-            });
+function BubbleSort(array, position, steps, colorSteps) {
+    let arr = array.slice();
+    let n = arr.length;
+    let colors = new Array(n).fill(0);
+  
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = 0; j < n - i - 1; j++) {
+        colors[j] = 1;
+        colors[j + 1] = 1;
+  
+        steps.push(arr.slice());
+        colorSteps.push(colors.slice());
+  
+        if (arr[j] > arr[j + 1]) {
+          let temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+  
+          colors[j] = 2;
+          colors[j + 1] = 2;
+  
+          steps.push(arr.slice());
+          colorSteps.push(colors.slice());
         }
-        colorKey[array.length - 1 - i] = 2;
-        arraySteps.push(array.slice());
-        colorSteps.push(colorKey.slice());
+  
+        colors[j] = 0;
+        colors[j + 1] = 0;
+      }
+      colors[n - i - 1] = 2;
     }
-    colorSteps[colorSteps.length - 1] = new Array(array.length).fill(2).map((color, index) => changedIndices.includes(index) ? 3 : color);
-    return;
-};
-
-export default BubbleSort;
+  
+    colors.fill(2);
+    steps.push(arr.slice());
+    colorSteps.push(colors.slice());
+  }
+  
+  export default BubbleSort;
+  

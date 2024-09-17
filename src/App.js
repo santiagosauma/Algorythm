@@ -58,8 +58,10 @@ class App extends Component {
     }
     this.setState({
       array: temp,
-      arraySteps: [temp],
+      arraySteps: [],
       currentStep: 0,
+      colorKey: new Array(count).fill(0),
+      colorSteps: [],
       changedIndices: [],
     }, () => {
       this.generateSteps();
@@ -68,13 +70,10 @@ class App extends Component {
 
   generateSteps = () => {
     let array = this.state.array.slice();
-    let steps = this.state.arraySteps.slice();
-    let colorSteps = this.state.colorSteps.slice();
+    let steps = [];
+    let colorSteps = [];
 
-    // Verificar si ya hay pasos generados
-    if (steps.length > 1) return;  // Evitar generar pasos de nuevo si ya hay más de uno.
-
-    this.ALGORITHMS[this.state.algorithm](array, 0, steps, colorSteps, this.state.changedIndices);
+    this.ALGORITHMS[this.state.algorithm](array, 0, steps, colorSteps);
 
     this.setState({
       arraySteps: steps,
@@ -85,10 +84,16 @@ class App extends Component {
   changeArray = (index, value) => {
     let arr = [...this.state.array];
     arr[index] = value;
+
+    let colorKey = [...this.state.colorKey];
+    colorKey[index] = 0;
+
     this.setState(prevState => ({
       array: arr,
-      arraySteps: [arr],
+      arraySteps: [],
       currentStep: 0,
+      colorKey: colorKey,
+      colorSteps: [],
       changedIndices: prevState.changedIndices.includes(index) ? prevState.changedIndices : [...prevState.changedIndices, index]
     }), () => {
       this.generateSteps();
@@ -99,6 +104,8 @@ class App extends Component {
     let steps = this.state.arraySteps;
     let colorSteps = this.state.colorSteps;
 
+    if (steps.length === 0) return;
+
     this.clearTimeouts();
 
     let timeouts = [];
@@ -106,11 +113,13 @@ class App extends Component {
     while (i < steps.length - this.state.currentStep) {
       let timeout = setTimeout(() => {
         let currentStep = this.state.currentStep;
-        this.setState({
-          array: steps[currentStep],
-          colorKey: colorSteps[currentStep],
-          currentStep: currentStep + 1,
-        });
+        if (currentStep < steps.length) {
+          this.setState({
+            array: steps[currentStep],
+            colorKey: colorSteps[currentStep],
+            currentStep: currentStep + 1,
+          });
+        }
       }, this.state.delay * i);
       timeouts.push(timeout);
       i++;
