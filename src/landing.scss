@@ -79,15 +79,19 @@ body {
   position: absolute;
   bottom: -100vh;
   transform-style: preserve-3d;
+  background-color: transparent;
+  stroke: transparent;
 }
 
-$total: 13; // Aumentamos ligeramente la cantidad de SVGs
+$total: 10; // Cantidad de SVGs en pantalla
+$min-separation: 10%; // Mínima separación entre SVGs en la pantalla
 
 @for $i from 1 through $total {
-  $scale: 0.2 + random() * 1.5; // Ajustamos la escala para un rango más controlado
+  $scale: 0.6 + random() * 1.6; // Tamaño de los SVGs
+  $left-position: ($i - 1) * (100% / $total) + random($min-separation); // Posición calculada para evitar superposición
   
   .svg-container:nth-child(#{$i}) {
-    left: random(90) * 1% + 5%; // Aseguramos que los SVGs estén dentro de la pantalla
+    left: $left-position; // Posición única para cada elemento
     animation: raise#{$i} 10 + random(20) + s linear infinite;
     animation-delay: random(10) - 5 + s;
     transform: scale($scale) rotate(random(360) + deg);
@@ -107,6 +111,14 @@ $total: 13; // Aumentamos ligeramente la cantidad de SVGs
 
 .svg {
   fill: $green;
+  stroke: none;
   width: 100px;
   height: auto;
+  shape-rendering: crispEdges;
+
+  @supports (-o-object-fit: fill) {
+    stroke: $green;
+    stroke-width: 0.5px;
+    shape-rendering: geometricPrecision;
+  }
 }
