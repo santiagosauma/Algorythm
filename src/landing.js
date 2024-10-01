@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './landing.scss';
 
 function Landing({ svgPaths }) {
+  const navigate = useNavigate();
+
+  const handleStartClick = () => {
+    navigate('/sorts');
+  };
+
   return (
     <div className="Landing">
       <div className="wrap">
@@ -17,7 +24,7 @@ function Landing({ svgPaths }) {
         <p className="description">
           Discover algorithms through interactive visuals and music, making learning both fun and engaging!
         </p>
-        <button className="start-button">Start!</button>
+        <button className="start-button" onClick={handleStartClick}>Start!</button>  {/* Botón de Start */}
       </header>
     </div>
   );

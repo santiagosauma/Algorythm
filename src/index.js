@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Importar Router
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Landing from './landing';
+import Menu from './Sorts';
+import Sorts from './Sorts';
 
 const svgPaths = [
   '/svg/note1.svg',
@@ -22,9 +25,13 @@ const svgPaths = [
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Landing svgPaths={svgPaths} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing svgPaths={svgPaths} />} /> {/* Ruta Landing */}
+        <Route path="/sorts" element={<Sorts />} /> {/* Ruta Menu */}
+      </Routes>
+    </Router>
   </React.StrictMode>,
 );
-
 
 reportWebVitals();
