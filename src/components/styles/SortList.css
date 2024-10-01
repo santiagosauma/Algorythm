@@ -1,0 +1,100 @@
+.sort-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.sort-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3b3d54;
+  border: 2px solid #7ceaa4;
+  border-radius: 15px;
+  padding: 15px;
+  width: 400px;
+  height: 180px;
+  color: #7ceaa4;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.sort-card:hover {
+  transform: scale(1.05);
+}
+
+.sort-image {
+  width: 120px;
+  height: 120px;
+  margin-right: 20px;
+}
+
+.sort-title {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  margin: 0;
+  line-height: 1.1;
+  text-align: left;
+  word-wrap: break-word;
+  flex: 1;
+}
+
+@media (max-width: 1200px) {
+  .sort-card {
+    width: 350px;
+    height: 160px;
+  }
+
+  .sort-title {
+    font-size: 2.5rem;
+  }
+
+  .sort-image {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sort-card {
+    width: 300px;
+    height: 140px;
+  }
+
+  .sort-title {
+    font-size: 2rem;
+  }
+
+  .sort-image {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sort-card {
+    width: 100%;
+    height: 120px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sort-image {
+    width: 60px;
+    height: 60px;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .sort-title {
+    font-size: 1.8rem;
+  }
+}

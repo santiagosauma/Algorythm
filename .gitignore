@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# DataBase
+/src/supabaseClient.js
+
 # production
 /build
 

@@ -1,13 +1,13 @@
 import React from 'react';
-import TopBar from './components/TopBar';
+import TopBar from './TopBar';
+import SortList from '../SortList';
 
 function Sorts() {
   return (
     <>
       <TopBar />
       <div>
-        <h1>Menu Page</h1>
-        <p>This is the Menu page.</p>
+        <SortList />
       </div>
     </>
   );

@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // I
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Landing from './landing';
-import Menu from './Sorts';
-import Sorts from './Sorts';
+import Sorts from './components/Sorts';
 
 const svgPaths = [
   '/svg/note1.svg',
