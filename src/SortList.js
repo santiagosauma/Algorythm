@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from './components/supabaseClient';
+import { supabase } from './components/supabaseConfig';
 import './components/styles/SortList.css';
 import { useNavigate } from 'react-router-dom';
 
