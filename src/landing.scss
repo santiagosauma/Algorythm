@@ -1,0 +1,112 @@
+$green: #7ceaa4;
+$purple: #3b3d54;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: rgba(172, 170, 190, 1);
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  overflow: hidden;
+  background-color: $purple;
+}
+
+.Landing {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.Landing-header {
+  color: white;
+  max-width: 600px;
+  z-index: 10;
+}
+
+.title {
+  font-family: 'Lilita One', sans-serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.description {
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.start-button {
+  font-size: 1.5rem;
+  padding: 0.8rem 2rem;
+  background-color: $green;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #6bd685;
+}
+
+.wrap {
+  perspective-origin: 50% 50%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.svg-container {
+  position: absolute;
+  bottom: -100vh;
+  transform-style: preserve-3d;
+}
+
+$total: 13; // Aumentamos ligeramente la cantidad de SVGs
+
+@for $i from 1 through $total {
+  $scale: 0.2 + random() * 1.5; // Ajustamos la escala para un rango más controlado
+  
+  .svg-container:nth-child(#{$i}) {
+    left: random(90) * 1% + 5%; // Aseguramos que los SVGs estén dentro de la pantalla
+    animation: raise#{$i} 10 + random(20) + s linear infinite;
+    animation-delay: random(10) - 5 + s;
+    transform: scale($scale) rotate(random(360) + deg);
+    z-index: $i - 7;
+    filter: blur(max($i - 10, 0) + px);
+
+    @keyframes raise#{$i} {
+      from {
+        bottom: -10vh;
+      }
+      to {
+        bottom: 110vh;
+      }
+    }
+  }
+}
+
+.svg {
+  fill: $green;
+  width: 100px;
+  height: auto;
+}
