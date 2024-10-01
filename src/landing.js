@@ -6,7 +6,7 @@ function Landing({ svgPaths }) {
   const navigate = useNavigate();
 
   const handleStartClick = () => {
-    navigate('/sorts');
+    navigate('/sorts'); 
   };
 
   return (
@@ -24,7 +24,7 @@ function Landing({ svgPaths }) {
         <p className="description">
           Discover algorithms through interactive visuals and music, making learning both fun and engaging!
         </p>
-        <button className="start-button" onClick={handleStartClick}>Start!</button>  {/* Botón de Start */}
+        <button className="start-button" onClick={handleStartClick}>Start!</button>
       </header>
     </div>
   );

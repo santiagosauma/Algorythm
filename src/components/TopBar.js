@@ -7,7 +7,7 @@ function TopBar() {
     <div className="top-bar">
       <div className="logo-container">
         <img src={process.env.PUBLIC_URL + '/resources/Algorythm.png'} alt="logo" className="logo" />
-        <span className="title">Algorythm</span>
+        <span className="Top-bar-title">Algorythm</span>
       </div>
       <div className="menu">
         <NavLink

@@ -1,51 +1,49 @@
 .top-bar {
-    background-color: #ccf5cc;
-    padding: 1.5rem 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #2b2d42;
-    height: 80px;
-  }
-  
-  .logo-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo {
-    width: 50px;
-    height: auto;
-    margin-right: 1rem;
-  }
-  
-  .title {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 2rem;
-    color: #2b2d42;
-    font-weight: bold;
-  }
-  
-  .menu {
-    display: flex;
-    gap: 2rem;
-    padding-right: 0.7rem;
-  }
-  
-  .menu-item {
-    font-family: Arial, sans-serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #2b2d42;
-    text-decoration: none;
-    padding: 0.3rem 0;
-  }
-  
-  .menu-item:hover {
-    text-decoration: underline;
-  }
-  
-  .menu-item.active {
-    text-decoration: underline;
-  }
-  
+  background-color: #ccf5cc;
+  padding: 1.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #2b2d42;
+  height: 80px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.Top-bar-title {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 2rem;
+  color: #2b2d42;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.menu-item {
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2b2d42;
+  text-decoration: none;
+  padding: 0.3rem 0;
+}
+
+.menu-item:hover {
+  text-decoration: underline;
+}
+
+.menu-item.active {
+  text-decoration: underline;
+}
