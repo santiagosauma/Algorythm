@@ -1,6 +1,6 @@
 import React from 'react';
 import TopBar from './TopBar';
-import SortList from '../SortList';
+import SortList from './SortList';
 
 function Sorts() {
   return (

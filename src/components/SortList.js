@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from './components/supabaseConfig';
-import './components/styles/SortList.css';
+import { supabase } from './supabaseConfig';
+import './styles/SortList.css';
 import { useNavigate } from 'react-router-dom';
 
 function SortList() {
@@ -31,7 +31,22 @@ function SortList() {
   };
 
   if (loading) {
-    return <p>Loading sorts...</p>;
+    return (
+      <div className="loader-container">
+        <ul className="wave-menu">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    );
   }
 
   if (sorts.length === 0) {
