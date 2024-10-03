@@ -127,3 +127,26 @@ pre {
       opacity: 0;
     }
 }
+
+.snackbar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #C7F9CC;
+    color: #3b3d54;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    animation: fadeInOut 3s ease;
+  }
+  
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  

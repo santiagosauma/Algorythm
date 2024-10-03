@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from './supabaseConfig';
 import './styles/CodeSnippet.css';
 
-function CodeSnippet({ id_sort }) {
+function CodeSnippet({ id_sort, snippetCodeRef }) {
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [snippet, setSnippet] = useState('');
@@ -20,7 +20,7 @@ function CodeSnippet({ id_sort }) {
       } else {
         const uniqueLanguages = [...new Set(data.map(item => item.language))];
         setLanguages(uniqueLanguages);
-        setSelectedLanguage(uniqueLanguages[0]); 
+        setSelectedLanguage(uniqueLanguages[0]);
       }
     };
 
@@ -49,34 +49,6 @@ function CodeSnippet({ id_sort }) {
     }
   }, [id_sort, selectedLanguage]);
 
-  useEffect(() => {
-    const snippetElement = document.querySelector('.code-snippet');
-    const editorContent = document.querySelector('.editor-content');
-
-    if (snippetElement && editorContent) {
-      const lines = snippet.split('\n');
-      const longestLine = lines.reduce((max, line) => Math.max(max, line.length), 0);
-
-      if (snippetElement.scrollHeight > snippetElement.clientHeight) {
-        snippetElement.classList.add('has-scroll');
-        editorContent.style.fontSize = '1rem';
-      } else {
-        snippetElement.classList.remove('has-scroll');
-
-        // Ajustar el tamaño de la fuente basado en la longitud de la línea más larga
-        if (longestLine <= 50) {
-          editorContent.style.fontSize = '1.5rem';
-        } else if (longestLine <= 80) {
-          editorContent.style.fontSize = '1.25rem';
-        } else if (longestLine <= 100) {
-          editorContent.style.fontSize = '1.1rem';
-        } else {
-          editorContent.style.fontSize = '1rem';
-        }
-      }
-    }
-  }, [snippet]);
-
   const formatSnippet = (code) => {
     return code.replace(/\\n/g, '\n').replace(/\\t/g, '    ');
   };
@@ -84,7 +56,7 @@ function CodeSnippet({ id_sort }) {
   if (loading) {
     return (
       <div className="loader-wrapper">
-        <div class="ld-ripple">
+        <div className="ld-ripple">
           <div></div>
           <div></div>
         </div>
@@ -107,7 +79,7 @@ function CodeSnippet({ id_sort }) {
           ))}
         </select>
       </div>
-      <div className="editor-content">
+      <div className="editor-content" ref={snippetCodeRef}>
         <pre className="code">
           {formatSnippet(snippet)}
         </pre>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from './supabaseConfig';
 import TopBar from './TopBar'; 
@@ -10,7 +10,26 @@ function SortDetails() {
   const [sortDetails, setSortDetails] = useState(null);
   const [resources, setResources] = useState([]); 
   const [loading, setLoading] = useState(true);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
   const navigate = useNavigate(); 
+
+  const snippetCodeRef = useRef(null);
+
+  const handleCopyCode = () => {
+    if (snippetCodeRef.current) {
+      const codeToCopy = snippetCodeRef.current.textContent;
+      navigator.clipboard.writeText(codeToCopy)
+        .then(() => {
+          setSnackbarVisible(true);
+          setTimeout(() => {
+            setSnackbarVisible(false);
+          }, 3000);
+        })
+        .catch((error) => {
+          console.error('Failed to copy code: ', error);
+        });
+    }
+  };
 
   useEffect(() => {
     const fetchSortDetails = async () => {
@@ -89,19 +108,25 @@ function SortDetails() {
       </div>
 
       <div className="snippet-and-buttons-container">
-        <CodeSnippet id_sort={id} />
+        <CodeSnippet id_sort={id} snippetCodeRef={snippetCodeRef} />
         <div className="action-buttons">
-            <button className="how-to-use-button">
-                <img src={process.env.PUBLIC_URL + '/resources/info.png'} alt="Info icon" className="button-icon" />
-                How to use
-            </button>
-            <button className="Copy-code">
-                <img src={process.env.PUBLIC_URL + '/resources/copy.png'} alt="Info icon" className="button-icon" />
-                Copy Code
-            </button>
-           <button className="practice-button">Practice</button>
+          <button className="how-to-use-button">
+            <img src={process.env.PUBLIC_URL + '/resources/info.png'} alt="Info icon" className="button-icon" />
+            How to use
+          </button>
+          <button className="Copy-code" onClick={handleCopyCode}>
+            <img src={process.env.PUBLIC_URL + '/resources/copy.png'} alt="Copy icon" className="button-icon" />
+            Copy Code
+          </button>
+          <button className="practice-button">Practice</button>
         </div>
       </div>
+
+      {snackbarVisible && (
+        <div className="snackbar">
+          Code copied to clipboard!
+        </div>
+      )}
     </div>
   );
 }
