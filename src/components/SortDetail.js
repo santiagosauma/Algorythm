@@ -45,7 +45,22 @@ function SortDetails() {
   }, [id]);
 
   if (loading) {
-    return <p>Loading sort details...</p>;
+    return (
+        <div className="loader-container">
+          <ul className="wave-menu">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      );
   }
 
   if (!sortDetails) {
