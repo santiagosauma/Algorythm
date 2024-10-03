@@ -91,11 +91,15 @@ function SortDetails() {
       <div className="snippet-and-buttons-container">
         <CodeSnippet id_sort={id} />
         <div className="action-buttons">
-          <button className="practice-button">Practice</button>
-          <button className="how-to-use-button">
-            <img src={process.env.PUBLIC_URL + '/resources/info.png'} alt="Info icon" className="button-icon" />
-            How to use
-          </button>
+            <button className="how-to-use-button">
+                <img src={process.env.PUBLIC_URL + '/resources/info.png'} alt="Info icon" className="button-icon" />
+                How to use
+            </button>
+            <button className="Copy-code">
+                <img src={process.env.PUBLIC_URL + '/resources/copy.png'} alt="Info icon" className="button-icon" />
+                Copy Code
+            </button>
+           <button className="practice-button">Practice</button>
         </div>
       </div>
     </div>

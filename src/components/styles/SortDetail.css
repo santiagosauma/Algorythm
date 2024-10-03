@@ -102,10 +102,10 @@
   padding: 0 3vw;
   flex-direction: row;
   justify-content: flex-start;
-  margin-right: 9.4vw;
+  margin-right: 1.6vw;
 }
 
-.practice-button, .how-to-use-button {
+.practice-button, .how-to-use-button, .Copy-code {
   background-color: #C7F9CC;
   color: #3b3d54;
   border: none;
@@ -134,11 +134,30 @@
   transition: transform 0.2s;
 }
 
+.Copy-code {
+  background-color: #C7F9CC;
+  border-radius: 8px;
+  padding: 15px 30px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s;
+}
+
 .how-to-use-button img.button-icon {
-  width: 20px; /* Tamaño de la imagen */
+  width: 20px;
   height: auto;
 }
 
-.how-to-use-button:hover {
+.Copy-code img.button-icon {
+  width: 20px;
+  height: auto;
+}
+
+.how-to-use-button:hover, .practice-button:hover, .Copy-code:hover{
   transform: scale(1.05);
 }
