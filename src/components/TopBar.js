@@ -1,20 +1,22 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './styles/TopBar.css';
 
 function TopBar() {
+  const location = useLocation();
+  
+  const isSortsPage = location.pathname.startsWith('/sorts') || location.pathname.startsWith('/sortdetails');
+
   return (
     <div className="top-bar">
       <div className="logo-container">
-        <NavLink to="/sorts">
-          <img src={process.env.PUBLIC_URL + '/resources/Algorythm.png'} alt="logo" className="logo" />
-        </NavLink>
+        <img src={process.env.PUBLIC_URL + '/resources/Algorythm.png'} alt="logo" className="logo" />
         <span className="Top-bar-title">Algorythm</span>
       </div>
       <div className="menu">
         <NavLink
           to="/sorts"
-          className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
+          className={isSortsPage ? 'menu-item active' : 'menu-item'}
         >
           Sorts
         </NavLink>

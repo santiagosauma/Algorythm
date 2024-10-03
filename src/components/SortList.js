@@ -27,7 +27,7 @@ function SortList() {
   }, []);
 
   const handleCardClick = (sortId) => {
-    navigate(`/sorts/${sortId}`);
+    navigate(`/sortdetails/${sortId}`);
   };
 
   if (loading) {
