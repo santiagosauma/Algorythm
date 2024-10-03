@@ -1,195 +1,139 @@
 .sort-details {
-    padding: 20px;
-    color: white;
-    background-color: #3b3d54;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .sort-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    padding-top: 3.5vh;
-  }
-  
-  .back-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding-left: 1vw;
-    display: flex;
-    align-items: center;
-  }
-  
-  .arrow-back {
-    width: 25px;
-    height: auto;
-  }
-  
-  .sort-title {
-    font-family: 'Sora', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 400;
-    color: white;
-    margin: 0;
-    margin-left: 2vw;
-    flex-grow: 1;
-  }
-  
-  .resource-buttons {
-    display: flex;
-    gap: 10px;
-    padding-right: 3vw;
-  }
-  
-  .resource-button {
-    background-color: white;
-    color: #3b3d54;
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-family: 'Sora', sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .resource-button img {
-    width: 2.5vw;
-    height: 2.5vw;
-  }
-  
-  
-  .resource-button:hover {
-    transform: scale(1.05);
-    background-color: #e0e0e0;
-  }
-  
-  .loader-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 80px);
-  }
-  
-  .wave-menu {
-    border: 4px solid #7ceaa4;
-    border-radius: 50px;
-    width: 200px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    transition: ease 0.2s;
-    position: relative;
-    background: #3b3d54;
-    justify-content: center;
-  }
-  
-  .wave-menu li {
-    list-style: none;
-    height: 30px;
-    width: 4px;
-    border-radius: 10px;
-    background: #7ceaa4;
-    margin: 0 6px;
-    padding: 0;
-    animation-name: wave1;
-    animation-duration: 0.3s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    transition: ease 0.2s;
-  }
-  
-  .wave-menu:hover > li {
-    background: #3b3d54;
-  }
-  
-  .wave-menu:hover {
-    background: #7ceaa4;
-  }
-  
-  .wave-menu li:nth-child(2) {
-    animation-name: wave2;
-    animation-delay: 0.2s;
-  }
-  
-  .wave-menu li:nth-child(3) {
-    animation-name: wave3;
-    animation-delay: 0.23s;
-    animation-duration: 0.4s;
-  }
-  
-  .wave-menu li:nth-child(4) {
-    animation-name: wave4;
-    animation-delay: 0.1s;
-    animation-duration: 0.3s;
-  }
-  
-  .wave-menu li:nth-child(5) {
-    animation-delay: 0.5s;
-  }
-  
-  .wave-menu li:nth-child(6) {
-    animation-name: wave2;
-    animation-duration: 0.5s;
-  }
-  
-  .wave-menu li:nth-child(8) {
-    animation-name: wave4;
-    animation-delay: 0.4s;
-    animation-duration: 0.25s;
-  }
-  
-  .wave-menu li:nth-child(9) {
-    animation-name: wave3;
-    animation-delay: 0.15s;
-  }
-  
-  @keyframes wave1 {
-    from {
-      transform: scaleY(1);
-    }
-  
-    to {
-      transform: scaleY(0.5);
-    }
-  }
-  
-  @keyframes wave2 {
-    from {
-      transform: scaleY(0.3);
-    }
-  
-    to {
-      transform: scaleY(0.6);
-    }
-  }
-  
-  @keyframes wave3 {
-    from {
-      transform: scaleY(0.6);
-    }
-  
-    to {
-      transform: scaleY(0.8);
-    }
-  }
-  
-  @keyframes wave4 {
-    from {
-      transform: scaleY(0.2);
-    }
-  
-    to {
-      transform: scaleY(0.5);
-    }
-  }
+  padding: 20px;
+  color: white;
+  background-color: #3b3d54;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.sort-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  padding-top: 3.5vh;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-left: 1vw;
+  display: flex;
+  align-items: center;
+}
+
+.arrow-back {
+  width: 25px;
+  height: auto;
+}
+
+.sort-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: white;
+  margin: 0;
+  margin-left: 2vw;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.resource-buttons {
+  display: flex;
+  gap: 10px;
+  padding-right: 3vw;
+}
+
+.resource-button {
+  background-color: white;
+  color: #3b3d54;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resource-button img {
+  width: 2.5vw;
+  height: 2.5vw;
+}
+
+.resource-button:hover {
+  transform: scale(1.05);
+  background-color: #e0e0e0;
+}
+
+.code-snippet {
+  max-width: 50%;
+  width: 35vw;
+  background-color: #1d1e22;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 20px;
+  color: white;
+  margin-top: 30px;
+  float: right;
+  margin-right: 4.3vw;
+}
+
+.language-dropdown {
+  background-color: #1d1e22;
+  color: white;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Sora', sans-serif;
+  margin-bottom: 1vh;
+}
+
+.language-dropdown option {
+  background-color: #1d1e22;
+  color: white;
+}
+
+.editor-content {
+  color: white;
+}
+
+.property {
+  margin-left: 30px;
+}
+
+.code .color-0 {
+  color: rgb(86, 156, 214);
+}
+
+.code .color-1 {
+  color: rgb(182, 206, 168);
+}
+
+.code .color-2 {
+  color: rgb(156, 220, 254);
+}
+
+.code .color-3 {
+  color: rgb(207, 146, 120);
+}
+
+.color-preview-1, .color-preview-2 {
+  height: 8px;
+  width: 8px;
+  border: 1px solid #fff;
+  display: inline-block;
+  margin-right: 3px;
+}
+
+.color-preview-1 {
+  background-color: #1d1e22;
+}
+
+.color-preview-2 {
+  background-color: rgba(0, 0, 0, 0.5);
+}

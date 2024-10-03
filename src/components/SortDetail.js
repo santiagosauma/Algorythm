@@ -10,6 +10,9 @@ function SortDetails() {
   const [resources, setResources] = useState([]); 
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); 
+  const [selectedLanguage, setSelectedLanguage] = useState("Python");
+
+  const languages = ["Python", "JavaScript", "C++", "Java"];
 
   useEffect(() => {
     const fetchSortDetails = async () => {
@@ -46,21 +49,21 @@ function SortDetails() {
 
   if (loading) {
     return (
-        <div className="loader-container">
-          <ul className="wave-menu">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
-      );
+      <div className="loader-container">
+        <ul className="wave-menu">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    );
   }
 
   if (!sortDetails) {
@@ -84,6 +87,42 @@ function SortDetails() {
               <img src={process.env.PUBLIC_URL + resource.image_path} alt="Resource logo" className="resource-logo" />
             </a>
           ))}
+        </div>
+      </div>
+
+      <div className="code-snippet">
+        <div className="header">
+          <select 
+            className="language-dropdown" 
+            value={selectedLanguage} 
+            onChange={(e) => setSelectedLanguage(e.target.value)}
+          >
+            {languages.map((language) => (
+              <option key={language} value={language}>
+                {language}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="editor-content">
+          <code className="code">
+            <p><span className="color-0">def bubble_sort(arr):</span></p>
+            <p className="property">
+              <span className="color-2">n = len(arr)</span>
+            </p>
+            <p className="property">
+              <span className="color-2">for i in range(n-1):</span>
+            </p>
+            <p className="property">
+              <span className="color-2">for j in range(n-i-1):</span>
+            </p>
+            <p className="property">
+              <span className="color-2">if arr[j] &gt; arr[j+1]:</span>
+            </p>
+            <p className="property">
+              <span className="color-2">arr[j], arr[j+1] = arr[j+1], arr[j]</span>
+            </p>
+          </code>
         </div>
       </div>
     </div>
