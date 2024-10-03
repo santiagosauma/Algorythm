@@ -38,7 +38,7 @@
     top: 0;
     background-color: #1d1e22;
     z-index: 1;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     padding-top: 15px;
 }
 
@@ -59,6 +59,7 @@
 
 .editor-content {
     color: white;
+    transition: font-size 0.3s ease;
 }
 
 pre {

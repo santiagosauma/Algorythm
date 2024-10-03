@@ -49,6 +49,34 @@ function CodeSnippet({ id_sort }) {
     }
   }, [id_sort, selectedLanguage]);
 
+  useEffect(() => {
+    const snippetElement = document.querySelector('.code-snippet');
+    const editorContent = document.querySelector('.editor-content');
+
+    if (snippetElement && editorContent) {
+      const lines = snippet.split('\n');
+      const longestLine = lines.reduce((max, line) => Math.max(max, line.length), 0);
+
+      if (snippetElement.scrollHeight > snippetElement.clientHeight) {
+        snippetElement.classList.add('has-scroll');
+        editorContent.style.fontSize = '1rem';
+      } else {
+        snippetElement.classList.remove('has-scroll');
+
+        // Ajustar el tamaño de la fuente basado en la longitud de la línea más larga
+        if (longestLine <= 50) {
+          editorContent.style.fontSize = '1.5rem';
+        } else if (longestLine <= 80) {
+          editorContent.style.fontSize = '1.25rem';
+        } else if (longestLine <= 100) {
+          editorContent.style.fontSize = '1.1rem';
+        } else {
+          editorContent.style.fontSize = '1rem';
+        }
+      }
+    }
+  }, [snippet]);
+
   const formatSnippet = (code) => {
     return code.replace(/\\n/g, '\n').replace(/\\t/g, '    ');
   };
