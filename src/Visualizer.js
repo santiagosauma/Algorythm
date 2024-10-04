@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import BubbleSort from '../algorithms/BubbleSort.js';
-import Bar from './Bar.js';
+import "./components/styles/Visualizer.css";
+import BubbleSort from './algorithms/BubbleSort.js';
+import Bar from './components/Bar.js';
 import Play from '@material-ui/icons/PlayCircleOutlineRounded';
 import Forwards from '@material-ui/icons/SkipNextRounded';
 import Backward from '@material-ui/icons/SkipPreviousRounded';

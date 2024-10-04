@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Landing from './landing';
 import Sorts from './components/Sorts';
 import SortDetails from './components/SortDetail';
+import Visualizer from './Visualizer';
 
 const svgPaths = [
   '/svg/note1.svg',
@@ -30,6 +31,7 @@ root.render(
         <Route path="/" element={<Landing svgPaths={svgPaths} />} />
         <Route path="/sorts" element={<Sorts />} />
         <Route path="/sortdetails/:id" element={<SortDetails />} />
+        <Route path="/visualizer" element={<Visualizer />} />
       </Routes>
     </Router>
   </React.StrictMode>,
