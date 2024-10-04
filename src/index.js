@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Landing from './landing';
 import Sorts from './components/Sorts';
 import SortDetails from './components/SortDetail';
-import Visualizer from './Visualizer';
+import Visualizer from './components/Visualizer';
 
 const svgPaths = [
   '/svg/note1.svg',
