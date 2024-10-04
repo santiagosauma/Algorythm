@@ -1,17 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from './supabaseConfig';
-import TopBar from './TopBar'; 
-import CodeSnippet from './CodeSnippet'; 
+import TopBar from './TopBar';
+import CodeSnippet from './CodeSnippet';
+import Visualizer from './Visualizer';
 import './styles/SortDetail.css';
 
 function SortDetails() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [sortDetails, setSortDetails] = useState(null);
-  const [resources, setResources] = useState([]); 
+  const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const snippetCodeRef = useRef(null);
 
@@ -90,12 +91,12 @@ function SortDetails() {
   return (
     <div className="sort-details">
       <TopBar />
-      
+
       <div className="sort-header">
         <button className="back-button" onClick={() => navigate(-1)}>
           <img src={process.env.PUBLIC_URL + '/resources/arrow.png'} alt="Go Back" className="arrow-back" />
         </button>
-        
+
         <h2 className="sort-title">{sortDetails.title}</h2>
 
         <div className="resource-buttons">
@@ -107,26 +108,34 @@ function SortDetails() {
         </div>
       </div>
 
-      <div className="snippet-and-buttons-container">
-        <CodeSnippet id_sort={id} snippetCodeRef={snippetCodeRef} />
-        <div className="action-buttons">
-          <button className="how-to-use-button">
-            <img src={process.env.PUBLIC_URL + '/resources/info.png'} alt="Info icon" className="button-icon" />
-            How to use
-          </button>
-          <button className="Copy-code" onClick={handleCopyCode}>
-            <img src={process.env.PUBLIC_URL + '/resources/copy.png'} alt="Copy icon" className="button-icon" />
-            Copy Code
-          </button>
-          <button className="practice-button">Practice</button>
+      <div className="content">
+        <div className="visualizer-container">
+          <Visualizer />
         </div>
-      </div>
 
-      {snackbarVisible && (
-        <div className="snackbar">
-          Code copied to clipboard!
+        <div className="code-and-actions">
+          <CodeSnippet id_sort={id} snippetCodeRef={snippetCodeRef} />
+
+          {/* Contenedor para los botones debajo del CodeSnippet */}
+          <div className="action-buttons-container">
+            <button className="how-to-use-button">
+              <img src={process.env.PUBLIC_URL + '/resources/info.png'} alt="Info icon" className="button-icon" />
+              How to use
+            </button>
+            <button className="copy-code" onClick={handleCopyCode}>
+              <img src={process.env.PUBLIC_URL + '/resources/copy.png'} alt="Copy icon" className="button-icon" />
+              Copy Code
+            </button>
+            <button className="practice-button">Practice</button>
+          </div>
         </div>
-      )}
+
+        {snackbarVisible && (
+          <div className="snackbar">
+            Code copied to clipboard!
+          </div>
+        )}
+      </div>
     </div>
   );
 }
