@@ -4,6 +4,7 @@
 
 .frame {
   margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,12 +16,13 @@
   justify-content: center;
   align-items: center;
   height: 220px;
+  width: 100%;
 }
 
 .card {
   border-radius: 2em;
-  padding: 0 1em;
   background-color: #818181;
+  width: 100%;
 }
 
 .controller {
@@ -50,4 +52,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.barsDiv{
+  width: 100%;
 }

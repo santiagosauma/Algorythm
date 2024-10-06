@@ -1,10 +1,12 @@
 .bar {
+    --bar-height: 0px;
     height: 200px;
     width: 2em;
     margin: 0 1em;
     transform-style: preserve-3d;
     transform: rotateX(-20deg) rotateY(-30deg);
     transition: background-color 0.3s ease;
+    position: relative;
 }
 
 .side {
@@ -29,31 +31,62 @@
 }
 
 .top {
-    height: 34px;
+    height: 4px;
     transform-origin: top;
     transform: rotateX(-90deg);
     background: rgba(254, 254, 254, 0.15);
 }
 
 .bottom {
-    height: 34px;
+    height: 4px;
     transform-origin: top;
-    background: rgba(225, 0, 120, 0.5);
-    box-shadow: rgba(225, 0, 120, 0.2);
-    transition: 0.3s;
+    transform: translateY(200px) rotateX(-90deg);
 }
 
 .color-bar {
-    background: rgba(225, 0, 120, 0.5);
-    box-shadow: rgba(225, 0, 120, 0.2);
-    transition: 0.3s;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--bar-height);
+    transition: height 0.3s ease;
+}
+
+.color-0 .color-bar { 
+    background-color: rgba(61, 90, 241, 0.5);
+    box-shadow: 5px 5px 50px 5px rgba(61, 90, 241, 0.2);
+}
+
+.color-1 .color-bar {
+    background-color: rgba(255, 48, 79, 1);
+    box-shadow: 5px 5px 50px 5px rgba(255, 48, 79, 0.5);
+}
+
+.color-2 .color-bar {
+    background-color: rgba(131, 232, 90, 0.5);
+    box-shadow: 5px 5px 50px 5px rgba(131, 232, 90, 0.2);
 }
 
 .input {
+    position: absolute;
+    left: 0;
+    width: 100%;
     text-align: center;
-    transform: rotate(-90deg);
+    transform: rotate(-90deg) translateY(100%) translateX(-50%);
+    transform-origin: left bottom;
     height: 25px;
     outline: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.quantity-nav {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
 }
 
 .quantity-button {
