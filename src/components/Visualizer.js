@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./styles/Visualizer.css";
 import BubbleSort from './algorithms/BubbleSort.js';
 import MergeSort from './algorithms/MergeSort.js'
+import QuickSort from './algorithms/QuickSort.js'
 import Bar from './Bar.js';
 
 class Visualizer extends Component {
@@ -14,7 +15,7 @@ class Visualizer extends Component {
     count: 10,
     delay: 100,
     speed: 1,
-    algorithm: 'Merge Sort',
+    algorithm: 'Quick Sort',
     timeouts: [],
     isPlaying: false,
     volumeLevel: 100,
@@ -24,6 +25,8 @@ class Visualizer extends Component {
   ALGORITHMS = {
     'Bubble Sort': BubbleSort,
     'Merge Sort': MergeSort,
+    'Quick Sort': QuickSort,
+
   }
 
   clearTimeouts = () => {
