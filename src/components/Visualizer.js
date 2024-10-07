@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import "./styles/Visualizer.css";
 import BubbleSort from './algorithms/BubbleSort.js';
 import Bar from './Bar.js';
-import Play from '@material-ui/icons/PlayCircleOutlineRounded';
-import Forwards from '@material-ui/icons/SkipNextRounded';
-import Backward from '@material-ui/icons/SkipPreviousRounded';
-import RotateLeft from '@material-ui/icons/RotateLeft';
 
 class Visualizer extends Component {
   state = {
@@ -169,13 +165,13 @@ class Visualizer extends Component {
     if (this.state.arraySteps.length === this.state.currentStep) {
       playButton = (
         <button className="controller" onClick={this.generateRandomArray}>
-          <RotateLeft />
+          <img src={process.env.PUBLIC_URL + '/resources/restart.png'} alt="Restart" />
         </button>
       );
     } else {
       playButton = (
         <button className="controller" onClick={this.start}>
-          <Play />
+          <img src={process.env.PUBLIC_URL + '/resources/play-button-arrowhead.png'} alt="Start" />
         </button>
       );
     }
@@ -187,12 +183,12 @@ class Visualizer extends Component {
         </div>
         <div className="control-pannel">
           <div className="control-buttons">
-            <button className="controller" onClick={this.previousStep}>
-              <Backward />
+            <button className="controller previous" onClick={this.previousStep}>
+              <img src={process.env.PUBLIC_URL + '/resources/next.png'} alt="Previous" />
             </button>
             {playButton}
             <button className="controller" onClick={this.nextStep}>
-              <Forwards />
+              <img src={process.env.PUBLIC_URL + '/resources/next.png'} alt="Next" />
             </button>
           </div>
         </div>

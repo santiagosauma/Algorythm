@@ -77,14 +77,14 @@
     outline: none;
     background: none;
     border: none;
-    color: white;
+    color: black;
     font-size: 12px;
     font-weight: bold;
 }
 
 .quantity-nav {
+    margin-top: 220px;
     position: absolute;
-    bottom: -30px;
     left: 0;
     right: 0;
 }

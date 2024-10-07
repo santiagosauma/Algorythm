@@ -21,28 +21,29 @@
 
 .card {
   border-radius: 2em;
-  background-color: #818181;
   width: 100%;
 }
 
 .controller {
-  background: #555;
+  background: #38A3A5;
   margin: 0 1em;
-  border: 1px solid;
-  height: 3em;
-  width: 3em;
-  border-radius: 100%;
-  background: transparent;
+  border: 1px solid #38A3A5;
+  height: 4em;
+  width: 4em;
+  border-radius: 50%;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.controller.previous {
+  transform: rotate(180deg);
+}
+
 .control-buttons {
   height: 4em;
-  width: 15em;
-  background-color: #eee;
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,6 +55,11 @@
   align-items: center;
 }
 
-.barsDiv{
+.barsDiv {
   width: 100%;
+}
+
+.control-buttons img {
+  height: 2em;
+  width: 2em;
 }
