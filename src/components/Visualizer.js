@@ -54,6 +54,7 @@ class Visualizer extends Component {
     } else {
       const algorithmTitle = data?.title || 'Bubble Sort';
       this.setState({ algorithm: algorithmTitle }, this.generateSteps);
+    }
   };
 
   clearTimeouts = () => {
