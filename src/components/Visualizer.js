@@ -12,10 +12,12 @@ class Visualizer extends Component {
     currentStep: 0,
     count: 10,
     delay: 100,
+    speed: 1,
     algorithm: 'Bubble Sort',
     timeouts: [],
     isPlaying: false,
     volumeLevel: 100,
+    remainingSteps: []
   }
 
   ALGORITHMS = {
@@ -104,35 +106,45 @@ class Visualizer extends Component {
 
     this.clearTimeouts();
 
-    let timeouts = [];
-    let i = 0;
-    while (i < steps.length - this.state.currentStep) {
-      let timeout = setTimeout(() => {
-        let currentStep = this.state.currentStep;
-        if (currentStep < steps.length) {
-          this.setState({
-            array: steps[currentStep],
-            colorKey: colorSteps[currentStep],
-            currentStep: currentStep + 1,
-          });
-        }
-        if (currentStep === steps.length - 1) {
-          this.setState({
-            isPlaying: false
-          });
-        }
-      }, this.state.delay * i);
-      timeouts.push(timeout);
-      i++;
-    }
     this.setState({
-      timeouts: timeouts,
-      isPlaying: true,
-    })
+      remainingSteps: steps.slice(this.state.currentStep),
+    }, () => {
+      this.playSteps(this.state.remainingSteps, this.state.currentStep);
+    });
   }
+
+    playSteps = (steps, startStep) => {
+      let timeouts = [];
+      
+      for (let i = 0; i < steps.length; i++) {
+        let timeout = setTimeout(() => {
+          let currentStep = startStep + i;
+          if (currentStep < this.state.arraySteps.length) {
+            this.setState({
+              array: steps[i],
+              colorKey: this.state.colorSteps[currentStep],
+              currentStep: currentStep + 1,
+            });
+          }
+          if (currentStep === this.state.arraySteps.length - 1) {
+            this.setState({
+              isPlaying: false
+            });
+          }
+        }, (this.state.delay / this.state.speed) * i);
+        timeouts.push(timeout);
+      }
+      this.setState({
+        timeouts: timeouts,
+        isPlaying: true,
+      })
+    }
 
   pause = () => {
     this.clearTimeouts();
+    this.setState({
+      isPlaying: false
+    });
   }
 
   previousStep = () => {
@@ -181,6 +193,30 @@ class Visualizer extends Component {
     }
   }
 
+  changeSpeed = () => {
+    let newSpeed;
+    switch (this.state.speed) {
+      case 1:
+        newSpeed = 1.5;
+        break;
+      case 1.5:
+        newSpeed = 2;
+        break;
+      case 2:
+        newSpeed = 0.5;
+        break;
+      default:
+        newSpeed = 1;
+        break;
+    }
+    this.setState({ speed: newSpeed }, () => {
+      if (this.state.isPlaying) {
+        this.clearTimeouts();
+        this.playSteps(this.state.arraySteps.slice(this.state.currentStep), this.state.currentStep);
+      }
+    });
+  };
+
   render() {
     let bars = this.state.array.map((value, index) => {
       return (
@@ -198,7 +234,7 @@ class Visualizer extends Component {
 
     if (this.state.isPlaying) {
       playButton = (
-        <button className="controller central">
+        <button className="controller central" onClick={this.pause}>
           <img src={process.env.PUBLIC_URL + '/resources/pause.png'} alt="Pause" />
         </button>
       );
@@ -229,7 +265,7 @@ class Visualizer extends Component {
             <button className="controller transparent-button">
               <img src={process.env.PUBLIC_URL + '/resources/guitar-instrument.png'} alt="Instrumento" className="large-icon" />
             </button>
-            <button className="controller previous central">
+            <button className="controller previous central" onClick={this.previousStep}>
               <img src={process.env.PUBLIC_URL + '/resources/next.png'} alt="Previous" />
             </button>
             {playButton}
@@ -239,8 +275,8 @@ class Visualizer extends Component {
             <button className="controller transparent-button" onClick={this.toggleVolume}>
               <img src={process.env.PUBLIC_URL + this.getVolumeIcon()} alt="Volume" className="large-icon" />
             </button>
-            <button className="controller transparent-button">
-              <span className="text-preview large-text">1x</span>
+            <button className="controller transparent-button" onClick={this.changeSpeed}>
+              <span className="text-preview large-text">{this.state.speed}x</span>
             </button>
           </div>
         </div>
