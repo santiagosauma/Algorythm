@@ -63,3 +63,17 @@
   height: 2em;
   width: 2em;
 }
+
+.controller.volume {
+  background: transparent;
+  margin: 0 1em;
+  border: 2px solid #38A3A5;
+  height: 4em;
+  width: 4em;
+  border-radius: 1.4em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

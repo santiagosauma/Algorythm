@@ -15,6 +15,7 @@ class Visualizer extends Component {
     algorithm: 'Bubble Sort',
     timeouts: [],
     changedIndices: [],
+    volumeLevel: 100,
   }
 
   ALGORITHMS = {
@@ -147,6 +148,30 @@ class Visualizer extends Component {
     })
   }
 
+  toggleVolume = () => {
+    let newVolumeLevel;
+    if (this.state.volumeLevel === 100) {
+      newVolumeLevel = 50;
+    } else if (this.state.volumeLevel === 50) {
+      newVolumeLevel = 0;
+    } else {
+      newVolumeLevel = 100;
+    }
+    this.setState({
+      volumeLevel: newVolumeLevel
+    });
+  }
+
+  getVolumeIcon = () => {
+    if (this.state.volumeLevel === 100) {
+      return '/resources/volume-up.png';
+    } else if (this.state.volumeLevel === 50) {
+      return '/resources/volume50.png';
+    } else {
+      return '/resources/mute.png';
+    }
+  }
+
   render() {
     let bars = this.state.array.map((value, index) => {
       return (
@@ -165,7 +190,7 @@ class Visualizer extends Component {
     if (this.state.arraySteps.length === this.state.currentStep) {
       playButton = (
         <button className="controller" onClick={this.generateRandomArray}>
-          <img src={process.env.PUBLIC_URL + '/resources/restart.png'} alt="Restart" />
+          <img src={process.env.PUBLIC_URL + '/resources/redo-arrow-symbol.png'} alt="Restart" />
         </button>
       );
     } else {
@@ -189,6 +214,9 @@ class Visualizer extends Component {
             {playButton}
             <button className="controller" onClick={this.nextStep}>
               <img src={process.env.PUBLIC_URL + '/resources/next.png'} alt="Next" />
+            </button>
+            <button className="controller volume" onClick={this.toggleVolume}>
+              <img src={process.env.PUBLIC_URL + this.getVolumeIcon()} alt="Volume" />
             </button>
           </div>
         </div>
