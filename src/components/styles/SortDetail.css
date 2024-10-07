@@ -77,10 +77,11 @@
 .visualizer-container {
   flex: 0 0 50%;
   max-width: 50%;
+  margin-left: 4vw;
 }
 
 .code-and-actions {
-  margin-left: 10vw;
+  margin-left: 6vw;
   flex: 0 0 71%;
   max-width: 100%;
   display: flex;

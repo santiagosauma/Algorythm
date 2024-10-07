@@ -198,19 +198,19 @@ class Visualizer extends Component {
 
     if (this.state.isPlaying) {
       playButton = (
-        <button className="controller" onClick={this.pause}>
+        <button className="controller central">
           <img src={process.env.PUBLIC_URL + '/resources/pause.png'} alt="Pause" />
         </button>
       );
     } else if (this.state.currentStep === this.state.arraySteps.length) {
       playButton = (
-        <button className="controller" onClick={this.generateRandomArray}>
+        <button className="controller central" onClick={this.generateRandomArray}>
           <img src={process.env.PUBLIC_URL + '/resources/redo-arrow-symbol.png'} alt="Restart" />
         </button>
       );
     } else {
       playButton = (
-        <button className="controller" onClick={this.start}>
+        <button className="controller central" onClick={this.start}>
           <img src={process.env.PUBLIC_URL + '/resources/play-button-arrowhead.png'} alt="Play" />
         </button>
       );
@@ -223,24 +223,24 @@ class Visualizer extends Component {
         </div>
         <div className="control-pannel">
           <div className="control-buttons">
-            <button className="controller volume">
-              <span className="text-preview">B</span>
+            <button className="controller transparent-button">
+              <span className="text-preview large-text">B</span>
             </button>
-            <button className="controller volume">
-              <img src={process.env.PUBLIC_URL + '/resources/guitar-instrument.png'} alt="Instrumento" />
+            <button className="controller transparent-button">
+              <img src={process.env.PUBLIC_URL + '/resources/guitar-instrument.png'} alt="Instrumento" className="large-icon" />
             </button>
-            <button className="controller previous" onClick={this.previousStep}>
+            <button className="controller previous central">
               <img src={process.env.PUBLIC_URL + '/resources/next.png'} alt="Previous" />
             </button>
             {playButton}
-            <button className="controller" onClick={this.nextStep}>
+            <button className="controller central" onClick={this.nextStep}>
               <img src={process.env.PUBLIC_URL + '/resources/next.png'} alt="Next" />
             </button>
-            <button className="controller volume" onClick={this.toggleVolume}>
-              <img src={process.env.PUBLIC_URL + this.getVolumeIcon()} alt="Volume" />
+            <button className="controller transparent-button" onClick={this.toggleVolume}>
+              <img src={process.env.PUBLIC_URL + this.getVolumeIcon()} alt="Volume" className="large-icon" />
             </button>
-            <button className="controller volume">
-              <span className="text-preview">1x</span>
+            <button className="controller transparent-button">
+              <span className="text-preview large-text">1x</span>
             </button>
           </div>
         </div>
