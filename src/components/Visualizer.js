@@ -14,7 +14,7 @@ class Visualizer extends Component {
     delay: 100,
     algorithm: 'Bubble Sort',
     timeouts: [],
-    changedIndices: [],
+    isPlaying: false,
     volumeLevel: 100,
   }
 
@@ -26,6 +26,7 @@ class Visualizer extends Component {
     this.state.timeouts.forEach((timeout) => clearTimeout(timeout))
     this.setState({
       timeouts: [],
+      isPlaying: false,
     })
   }
 
@@ -59,7 +60,6 @@ class Visualizer extends Component {
       currentStep: 0,
       colorKey: new Array(count).fill(0),
       colorSteps: [],
-      changedIndices: [],
     }, () => {
       this.generateSteps();
     });
@@ -91,7 +91,6 @@ class Visualizer extends Component {
       currentStep: 0,
       colorKey: colorKey,
       colorSteps: [],
-      changedIndices: prevState.changedIndices.includes(index) ? prevState.changedIndices : [...prevState.changedIndices, index]
     }), () => {
       this.generateSteps();
     });
@@ -101,7 +100,7 @@ class Visualizer extends Component {
     let steps = this.state.arraySteps;
     let colorSteps = this.state.colorSteps;
 
-    if (steps.length === 0) return;
+    if (steps.length === 0 || this.state.isPlaying) return;
 
     this.clearTimeouts();
 
@@ -117,13 +116,24 @@ class Visualizer extends Component {
             currentStep: currentStep + 1,
           });
         }
+        // Si llegamos al último paso, detener la reproducción
+        if (currentStep === steps.length - 1) {
+          this.setState({
+            isPlaying: false
+          });
+        }
       }, this.state.delay * i);
       timeouts.push(timeout);
       i++;
     }
     this.setState({
-      timeouts: timeouts
+      timeouts: timeouts,
+      isPlaying: true,
     })
+  }
+
+  pause = () => {
+    this.clearTimeouts();
   }
 
   previousStep = () => {
@@ -187,7 +197,13 @@ class Visualizer extends Component {
 
     let playButton;
 
-    if (this.state.arraySteps.length === this.state.currentStep) {
+    if (this.state.isPlaying) {
+      playButton = (
+        <button className="controller" onClick={this.pause}>
+          <img src={process.env.PUBLIC_URL + '/resources/pause.png'} alt="Pause" />
+        </button>
+      );
+    } else if (this.state.currentStep === this.state.arraySteps.length) {
       playButton = (
         <button className="controller" onClick={this.generateRandomArray}>
           <img src={process.env.PUBLIC_URL + '/resources/redo-arrow-symbol.png'} alt="Restart" />
@@ -196,7 +212,7 @@ class Visualizer extends Component {
     } else {
       playButton = (
         <button className="controller" onClick={this.start}>
-          <img src={process.env.PUBLIC_URL + '/resources/play-button-arrowhead.png'} alt="Start" />
+          <img src={process.env.PUBLIC_URL + '/resources/play-button-arrowhead.png'} alt="Play" />
         </button>
       );
     }
