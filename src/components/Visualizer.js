@@ -3,6 +3,9 @@ import "./styles/Visualizer.css";
 import BubbleSort from './algorithms/BubbleSort.js';
 import MergeSort from './algorithms/MergeSort.js'
 import QuickSort from './algorithms/QuickSort.js'
+import InsertionSort from './algorithms/InsertionSort.js'
+import RadixSort from './algorithms/RadixSort.js'
+import HeapSort from './algorithms/HeapSort.js'
 import Bar from './Bar.js';
 
 class Visualizer extends Component {
@@ -15,7 +18,7 @@ class Visualizer extends Component {
     count: 10,
     delay: 100,
     speed: 1,
-    algorithm: 'Quick Sort',
+    algorithm: 'Heap Sort',
     timeouts: [],
     isPlaying: false,
     volumeLevel: 100,
@@ -26,7 +29,10 @@ class Visualizer extends Component {
     'Bubble Sort': BubbleSort,
     'Merge Sort': MergeSort,
     'Quick Sort': QuickSort,
-
+    'Insertion Sort': InsertionSort,
+    'Radix Sort': RadixSort,
+    'Heap Sort': HeapSort,
+    
   }
 
   clearTimeouts = () => {
