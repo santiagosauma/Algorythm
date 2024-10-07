@@ -25,6 +25,7 @@ function Bar({ index, length, color, changeArray }) {
     }
   };
 
+  /*
   const increment = () => {
     let newLen = len + 1;
     if (newLen > 200) newLen = 200;
@@ -38,6 +39,7 @@ function Bar({ index, length, color, changeArray }) {
     setLen(newLen);
     changeArray(index, newLen);
   };
+  */
 
   return (
     <div className={`bar color-${color}`} style={{ '--bar-height': `${len}px` }}>
@@ -62,10 +64,13 @@ function Bar({ index, length, color, changeArray }) {
       <div className="side back">
         <div className="color-bar back-color-bar"></div>
       </div>
+      
+      {/*
       <div className="quantity-nav">
         <div className="quantity-button quantity-up" onClick={increment}>+</div>
         <div className="quantity-button quantity-down" onClick={decrement}>-</div>
       </div>
+      */}
     </div>
   );
 }

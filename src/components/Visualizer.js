@@ -116,7 +116,6 @@ class Visualizer extends Component {
             currentStep: currentStep + 1,
           });
         }
-        // Si llegamos al último paso, detener la reproducción
         if (currentStep === steps.length - 1) {
           this.setState({
             isPlaying: false
@@ -224,6 +223,12 @@ class Visualizer extends Component {
         </div>
         <div className="control-pannel">
           <div className="control-buttons">
+            <button className="controller volume">
+              <span className="text-preview">B</span>
+            </button>
+            <button className="controller volume">
+              <img src={process.env.PUBLIC_URL + '/resources/guitar-instrument.png'} alt="Instrumento" />
+            </button>
             <button className="controller previous" onClick={this.previousStep}>
               <img src={process.env.PUBLIC_URL + '/resources/next.png'} alt="Previous" />
             </button>
@@ -233,6 +238,9 @@ class Visualizer extends Component {
             </button>
             <button className="controller volume" onClick={this.toggleVolume}>
               <img src={process.env.PUBLIC_URL + this.getVolumeIcon()} alt="Volume" />
+            </button>
+            <button className="controller volume">
+              <span className="text-preview">1x</span>
             </button>
           </div>
         </div>
