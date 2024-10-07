@@ -110,13 +110,11 @@ function SortDetails() {
 
       <div className="content">
         <div className="visualizer-container">
-          <Visualizer />
+          <Visualizer id={id} />
         </div>
 
         <div className="code-and-actions">
           <CodeSnippet id_sort={id} snippetCodeRef={snippetCodeRef} />
-
-          {/* Contenedor para los botones debajo del CodeSnippet */}
           <div className="action-buttons-container">
             <button className="how-to-use-button">
               <img src={process.env.PUBLIC_URL + '/resources/info.png'} alt="Info icon" className="button-icon" />

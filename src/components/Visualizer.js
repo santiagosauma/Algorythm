@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { supabase } from './supabaseConfig';
 import "./styles/Visualizer.css";
 import BubbleSort from './algorithms/BubbleSort.js';
-import MergeSort from './algorithms/MergeSort.js'
-import QuickSort from './algorithms/QuickSort.js'
-import InsertionSort from './algorithms/InsertionSort.js'
-import RadixSort from './algorithms/RadixSort.js'
-import HeapSort from './algorithms/HeapSort.js'
+import MergeSort from './algorithms/MergeSort.js';
+import QuickSort from './algorithms/QuickSort.js';
+import InsertionSort from './algorithms/InsertionSort.js';
+import RadixSort from './algorithms/RadixSort.js';
+import HeapSort from './algorithms/HeapSort.js';
+import SelectionSort from './algorithms/SelectionSort.js';
+import BucketSort from './algorithms/BucketSort.js';
+import GnomeSort from './algorithms/GnomeSort.js'
 import Bar from './Bar.js';
 
 class Visualizer extends Component {
@@ -18,12 +22,13 @@ class Visualizer extends Component {
     count: 10,
     delay: 100,
     speed: 1,
-    algorithm: 'Heap Sort',
+    algorithm: '',
     timeouts: [],
     isPlaying: false,
     volumeLevel: 100,
-    remainingSteps: []
-  }
+    remainingSteps: [],
+    isCompleted: false,
+  };
 
   ALGORITHMS = {
     'Bubble Sort': BubbleSort,
@@ -32,32 +37,51 @@ class Visualizer extends Component {
     'Insertion Sort': InsertionSort,
     'Radix Sort': RadixSort,
     'Heap Sort': HeapSort,
-    
-  }
+    'Selection Sort': SelectionSort,
+    'Bucket Sort': BucketSort,
+    'Gnome Sort': GnomeSort
+  };
+
+  fetchSortAlgorithm = async (id) => {
+    const { data, error } = await supabase
+      .from('sorts')
+      .select('title')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching sort details:', error);
+    } else {
+      const algorithmTitle = data?.title || 'Bubble Sort';
+      this.setState({ algorithm: algorithmTitle }, this.generateSteps);
+    }
+  };
 
   clearTimeouts = () => {
-    this.state.timeouts.forEach((timeout) => clearTimeout(timeout))
+    this.state.timeouts.forEach((timeout) => clearTimeout(timeout));
     this.setState({
       timeouts: [],
       isPlaying: false,
-    })
-  }
+    });
+  };
 
   componentDidMount() {
+    const { id } = this.props;
+    this.fetchSortAlgorithm(id);
     this.generateRandomArray();
   }
 
   generateRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
-  }
+  };
 
   clearColorKey = () => {
     let blankKey = new Array(this.state.count).fill(0);
     this.setState({
       colorKey: blankKey,
-      colorSteps: [blankKey]
-    })
-  }
+      colorSteps: [blankKey],
+    });
+  };
 
   generateRandomArray = () => {
     this.clearTimeouts();
@@ -73,23 +97,23 @@ class Visualizer extends Component {
       currentStep: 0,
       colorKey: new Array(count).fill(0),
       colorSteps: [],
-    }, () => {
-      this.generateSteps();
-    });
+    }, this.generateSteps);
   };
 
   generateSteps = () => {
+    if (!this.state.algorithm) return;
     let array = this.state.array.slice();
     let steps = [];
     let colorSteps = [];
-
-    this.ALGORITHMS[this.state.algorithm](array, 0, steps, colorSteps);
-
+    const algorithmFunction = this.ALGORITHMS[this.state.algorithm];
+    if (algorithmFunction) {
+      algorithmFunction(array, 0, steps, colorSteps);
+    }
     this.setState({
       arraySteps: steps,
-      colorSteps: colorSteps
-    })
-  }
+      colorSteps: colorSteps,
+    });
+  };
 
   changeArray = (index, value) => {
     let arr = [...this.state.array];
@@ -107,55 +131,51 @@ class Visualizer extends Component {
     }), () => {
       this.generateSteps();
     });
-  }
+  };
 
   start = () => {
     let steps = this.state.arraySteps;
-
     if (steps.length === 0 || this.state.isPlaying) return;
-
     this.clearTimeouts();
-
     this.setState({
       remainingSteps: steps.slice(this.state.currentStep),
     }, () => {
       this.playSteps(this.state.remainingSteps, this.state.currentStep);
     });
-  }
+  };
 
-    playSteps = (steps, startStep) => {
-      let timeouts = [];
-      
-      for (let i = 0; i < steps.length; i++) {
-        let timeout = setTimeout(() => {
-          let currentStep = startStep + i;
-          if (currentStep < this.state.arraySteps.length) {
-            this.setState({
-              array: steps[i],
-              colorKey: this.state.colorSteps[currentStep],
-              currentStep: currentStep + 1,
-            });
-          }
-          if (currentStep === this.state.arraySteps.length - 1) {
-            this.setState({
-              isPlaying: false
-            });
-          }
-        }, (this.state.delay / this.state.speed) * i);
-        timeouts.push(timeout);
-      }
-      this.setState({
-        timeouts: timeouts,
-        isPlaying: true,
-      })
+  playSteps = (steps, startStep) => {
+    let timeouts = [];
+    for (let i = 0; i < steps.length; i++) {
+      let timeout = setTimeout(() => {
+        let currentStep = startStep + i;
+        if (currentStep < this.state.arraySteps.length) {
+          this.setState({
+            array: steps[i],
+            colorKey: this.state.colorSteps[currentStep],
+            currentStep: currentStep + 1,
+          });
+        }
+        if (currentStep === this.state.arraySteps.length - 1) {
+          this.setState({
+            isPlaying: false,
+          });
+        }
+      }, (this.state.delay / this.state.speed) * i);
+      timeouts.push(timeout);
     }
+    this.setState({
+      timeouts: timeouts,
+      isPlaying: true,
+    });
+  };
 
   pause = () => {
     this.clearTimeouts();
     this.setState({
-      isPlaying: false
+      isPlaying: false,
     });
-  }
+  };
 
   previousStep = () => {
     let currentStep = this.state.currentStep;
@@ -164,9 +184,9 @@ class Visualizer extends Component {
     this.setState({
       currentStep: currentStep,
       array: this.state.arraySteps[currentStep],
-      colorKey: this.state.colorSteps[currentStep]
-    })
-  }
+      colorKey: this.state.colorSteps[currentStep],
+    });
+  };
 
   nextStep = () => {
     let currentStep = this.state.currentStep;
@@ -175,9 +195,9 @@ class Visualizer extends Component {
     this.setState({
       currentStep: currentStep,
       array: this.state.arraySteps[currentStep],
-      colorKey: this.state.colorSteps[currentStep]
-    })
-  }
+      colorKey: this.state.colorSteps[currentStep],
+    });
+  };
 
   toggleVolume = () => {
     let newVolumeLevel;
@@ -189,9 +209,9 @@ class Visualizer extends Component {
       newVolumeLevel = 100;
     }
     this.setState({
-      volumeLevel: newVolumeLevel
+      volumeLevel: newVolumeLevel,
     });
-  }
+  };
 
   getVolumeIcon = () => {
     if (this.state.volumeLevel === 100) {
@@ -201,7 +221,7 @@ class Visualizer extends Component {
     } else {
       return '/resources/mute.png';
     }
-  }
+  };
 
   changeSpeed = () => {
     let newSpeed;
