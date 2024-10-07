@@ -54,7 +54,7 @@ class Visualizer extends Component {
     const count = this.state.count;
     const temp = [];
     for (let i = 0; i < count; i++) {
-      temp.push(this.generateRandomNumber(50, 200));
+      temp.push(this.generateRandomNumber(50, 300));
     }
     this.setState({
       array: temp,
@@ -100,7 +100,6 @@ class Visualizer extends Component {
 
   start = () => {
     let steps = this.state.arraySteps;
-    let colorSteps = this.state.colorSteps;
 
     if (steps.length === 0 || this.state.isPlaying) return;
 
