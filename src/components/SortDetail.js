@@ -32,6 +32,10 @@ function SortDetails() {
     }
   };
 
+  const handlePracticeClick = () => {
+    navigate('/practice');
+  };
+
   useEffect(() => {
     const fetchSortDetails = async () => {
       const { data, error } = await supabase
@@ -124,7 +128,7 @@ function SortDetails() {
               <img src={process.env.PUBLIC_URL + '/resources/copy.png'} alt="Copy icon" className="button-icon" />
               Copy Code
             </button>
-            <button className="practice-button">Practice</button>
+            <button className="practice-button" onClick={handlePracticeClick}>Practice</button>
           </div>
         </div>
 

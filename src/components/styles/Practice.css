@@ -1,0 +1,36 @@
+.practice-page {
+    padding: 0px;
+    color: white;
+    background-color: #3b3d54;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  .practice-content {
+    text-align: center;
+    margin-top: 10vh;
+  }
+  
+  .practice-content h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .coming-soon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 3px solid #32b67a;
+    border-radius: 12px;
+    padding: 40px;
+  }
+  
+  .coming-soon-container h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 3rem;
+    color: white;
+  }
+  

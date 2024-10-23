@@ -7,6 +7,7 @@ import Landing from './landing';
 import Sorts from './components/Sorts';
 import SortDetails from './components/SortDetail';
 import Visualizer from './components/Visualizer';
+import Practice from './components/Practice';
 
 const svgPaths = [
   '/svg/note1.svg',
@@ -32,6 +33,7 @@ root.render(
         <Route path="/sorts" element={<Sorts />} />
         <Route path="/sortdetails/:id" element={<SortDetails />} />
         <Route path="/visualizer" element={<Visualizer />} />
+        <Route path="/practice" element={<Practice />} />
       </Routes>
     </Router>
   </React.StrictMode>,
