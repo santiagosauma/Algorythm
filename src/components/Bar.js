@@ -25,6 +25,8 @@ function Bar({ index, length, color, changeArray }) {
     }
   };
 
+  // Volume Buttons (Deactivated)
+
   /*
   const increment = () => {
     let newLen = len + 1;
