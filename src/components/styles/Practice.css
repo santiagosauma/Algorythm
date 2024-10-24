@@ -1,36 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
 .practice-page {
-    padding: 0px;
-    color: white;
-    background-color: #3b3d54;
-    min-height: 100vh;
-    margin: 0;
-  }
-  
-  .practice-content {
-    text-align: center;
-    margin-top: 10vh;
-  }
-  
-  .practice-content h1 {
-    font-family: 'Sora', sans-serif;
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 20px;
-  }
-  
-  .coming-soon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: 3px solid #32b67a;
-    border-radius: 12px;
-    padding: 40px;
-  }
-  
-  .coming-soon-container h2 {
-    font-family: 'Sora', sans-serif;
-    font-size: 3rem;
-    color: white;
-  }
-  
+  padding: 0;
+  color: white;
+  background-color: #3b3d54;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.practice-content {
+  text-align: center;
+  margin-top: 3.5vh;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: relative;
+  margin-bottom: 22vh;
+}
+
+.back-button {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: auto;
+}
+
+.arrow-back {
+  width: 30px;
+  height: auto;
+}
+
+.header-row h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.coming-soon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  text-align: center;
+  padding: 40px;
+  border: 3px solid #32b67a;
+  border-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.coming-soon-container h2 {
+  font-family: 'Lilita One', cursive;
+  font-size: 7rem;
+  color: white;
+  margin: 0;
+}
