@@ -13,7 +13,7 @@
   margin-top: 3.5vh;
 }
 
-.header-row {
+.header-row { 
   display: flex;
   align-items: center;
   justify-content: space-between;
