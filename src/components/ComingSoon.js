@@ -1,16 +1,12 @@
 import React from 'react';
 import TopBar from './TopBar';
-import { useLocation } from 'react-router-dom';
-import './styles/Practice.css';
+import './styles/ComingSoon.css';
 
-function Practice() {
-  const location = useLocation();
-  const title = location.state?.fromGraphs ? 'Graphs - Exercises' : 'Practice - Exercises';
-
+function ComingSoon({ title }) {
   return (
-    <div className="practice-page">
+    <div className="coming-soon-page">
       <TopBar />
-      <div className="practice-content">
+      <div className="coming-soon-content">
         <div className="header-row">
           <button className="back-button" onClick={() => window.history.back()}>
             <img src={process.env.PUBLIC_URL + '/resources/arrow.png'} alt="Go Back" className="arrow-back" />
@@ -25,4 +21,4 @@ function Practice() {
   );
 }
 
-export default Practice;
+export default ComingSoon;

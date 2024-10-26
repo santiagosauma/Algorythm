@@ -4,8 +4,9 @@ import './styles/TopBar.css';
 
 function TopBar() {
   const location = useLocation();
-  
+
   const isSortsPage = location.pathname.startsWith('/sorts') || location.pathname.startsWith('/sortdetails');
+  const isGraphsPage = location.pathname.startsWith('/graphs') || location.pathname === '/practice';
 
   return (
     <div className="top-bar">
@@ -22,7 +23,7 @@ function TopBar() {
         </NavLink>
         <NavLink
           to="/graphs"
-          className={({ isActive }) => (isActive ? 'menu-item active' : 'menu-item')}
+          className={isGraphsPage ? 'menu-item active' : 'menu-item'}
         >
           Graphs
         </NavLink>

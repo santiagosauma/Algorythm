@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Importar Router
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Landing from './landing';
 import Sorts from './components/Sorts';
 import SortDetails from './components/SortDetail';
 import Visualizer from './components/Visualizer';
-import Practice from './components/Practice';
+import ComingSoon from './components/ComingSoon';
 
 const svgPaths = [
   '/svg/note1.svg',
@@ -33,7 +33,8 @@ root.render(
         <Route path="/sorts" element={<Sorts />} />
         <Route path="/sortdetails/:id" element={<SortDetails />} />
         <Route path="/visualizer" element={<Visualizer />} />
-        <Route path="/practice" element={<Practice />} />
+        <Route path="/graphs" element={<ComingSoon title="Graphs" />} />
+        <Route path="/practice" element={<ComingSoon title="Practice - Exercises" />} />
       </Routes>
     </Router>
   </React.StrictMode>,

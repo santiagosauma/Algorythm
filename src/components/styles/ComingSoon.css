@@ -1,0 +1,60 @@
+.coming-soon-page {
+  padding: 0;
+  color: white;
+  background-color: #3b3d54;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.coming-soon-content {
+  text-align: center;
+  margin-top: 3.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  position: relative;
+  width: 100%;
+}
+
+.back-button {
+  position: absolute;
+  left: 20px;
+}
+
+.arrow-back {
+  width: 30px;
+  height: auto;
+}
+
+.header-row h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
+  flex: 1;
+}
+
+.coming-soon-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border: 3px solid #32b67a;
+  border-radius: 12px;
+  margin-top: 20vh;
+}
+
+.coming-soon-container h2 {
+  font-family: 'Lilita One', cursive;
+  font-size: 5rem;
+  color: white;
+  margin: 0;
+}
