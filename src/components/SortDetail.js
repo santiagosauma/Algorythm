@@ -4,6 +4,7 @@ import { supabase } from './supabaseConfig';
 import TopBar from './TopBar';
 import CodeSnippet from './CodeSnippet';
 import Visualizer from './Visualizer';
+import HowToUse from './HowToUse';
 import './styles/SortDetail.css';
 
 function SortDetails() {
@@ -12,6 +13,7 @@ function SortDetails() {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const [showHowToUse, setShowHowToUse] = useState(false);
   const navigate = useNavigate();
 
   const snippetCodeRef = useRef(null);
@@ -34,6 +36,14 @@ function SortDetails() {
 
   const handlePracticeClick = () => {
     navigate('/practice');
+  };
+
+  const handleHowToUseClick = () => {
+    setShowHowToUse(true);
+  };
+
+  const handleCloseHowToUse = () => {
+    setShowHowToUse(false);
   };
 
   useEffect(() => {
@@ -101,7 +111,9 @@ function SortDetails() {
           <img src={process.env.PUBLIC_URL + '/resources/arrow.png'} alt="Go Back" className="arrow-back" />
         </button>
 
-        <h2 className="sort-title">{sortDetails.title}</h2>
+        <div className="sort-title-container">
+          <h2 className="sort-title">{sortDetails.title}</h2>
+        </div>
 
         <div className="resource-buttons">
           {resources.map((resource, index) => (
@@ -120,7 +132,7 @@ function SortDetails() {
         <div className="code-and-actions">
           <CodeSnippet id_sort={id} snippetCodeRef={snippetCodeRef} />
           <div className="action-buttons-container">
-            <button className="how-to-use-button">
+            <button className="how-to-use-button" onClick={handleHowToUseClick}>
               <img src={process.env.PUBLIC_URL + '/resources/info.png'} alt="Info icon" className="button-icon" />
               How to use
             </button>
@@ -137,6 +149,8 @@ function SortDetails() {
             Code copied to clipboard!
           </div>
         )}
+
+        {showHowToUse && <HowToUse onClose={handleCloseHowToUse} />}
       </div>
     </div>
   );
