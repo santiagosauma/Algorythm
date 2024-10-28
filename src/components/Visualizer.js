@@ -30,6 +30,9 @@ class Visualizer extends Component {
     remainingSteps: [],
     isCompleted: false,
     instrument: null,
+    instrumentName: 'acoustic_guitar_nylon',
+    currentScale: 'C',
+    scales: ['C', 'D'],
   };
 
   ALGORITHMS = {
@@ -53,7 +56,7 @@ class Visualizer extends Component {
 
   initializeSoundfont = () => {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    Soundfont.instrument(audioContext, 'electric_guitar_jazz').then(instrument => {
+    Soundfont.instrument(audioContext, this.state.instrumentName).then(instrument => {
       this.setState({ instrument });
     });
   };
@@ -92,7 +95,10 @@ class Visualizer extends Component {
   playSound = (note) => {
     const { instrument, volumeLevel } = this.state;
     if (instrument) {
-      instrument.play(note, null, { gain: volumeLevel / 100 });
+      instrument.play(note, null, {
+        gain: volumeLevel / 100,
+        duration: 0.2, // Shorter duration
+      });
     }
   };
 
@@ -104,8 +110,11 @@ class Visualizer extends Component {
         if (currentStep < this.state.arraySteps.length) {
           const newArray = steps[i];
           const maxVal = Math.max(...newArray);
-          const noteIndex = Math.floor((newArray[0] / maxVal) * 10);
-          const note = ["A3", "B3", "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"][noteIndex];
+          const normalizedValue = newArray[0] / maxVal;
+
+          const scaleNotes = this.getScaleNotes();
+          const noteIndex = Math.floor(normalizedValue * (scaleNotes.length - 1));
+          const note = scaleNotes[noteIndex];
 
           this.setState({
             array: newArray,
@@ -118,6 +127,11 @@ class Visualizer extends Component {
         if (currentStep === this.state.arraySteps.length - 1) {
           this.setState({
             isPlaying: false,
+          }, () => {
+            // Play arpeggio or closing note if instrument is a guitar
+            if (this.state.instrumentName.includes('guitar')) {
+              this.playClosingNotes();
+            }
           });
         }
       }, (this.state.delay / this.state.speed) * i);
@@ -126,6 +140,28 @@ class Visualizer extends Component {
     this.setState({
       timeouts: timeouts,
       isPlaying: true,
+    });
+  };
+
+  getScaleNotes = () => {
+    const { currentScale } = this.state;
+    const scales = {
+      'C': ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4'],
+      'D': ['D3', 'E3', 'F#3', 'G3', 'A3', 'B3', 'C#4', 'D4'],
+    };
+    return scales[currentScale] || scales['C'];
+  };
+
+  playClosingNotes = () => {
+    const { instrument, volumeLevel } = this.state;
+    const arpeggioNotes = this.getScaleNotes();
+    let delay = 0;
+    arpeggioNotes.forEach((note) => {
+      instrument.play(note, instrument.context.currentTime + delay, {
+        gain: volumeLevel / 100,
+        duration: 0.2,
+      });
+      delay += 0.1;
     });
   };
 
@@ -253,6 +289,13 @@ class Visualizer extends Component {
     });
   };
 
+  changeScale = () => {
+    const { scales, currentScale } = this.state;
+    const currentIndex = scales.indexOf(currentScale);
+    const nextIndex = (currentIndex + 1) % scales.length;
+    this.setState({ currentScale: scales[nextIndex] });
+  };
+
   render() {
     let bars = this.state.array.map((value, index) => {
       return (
@@ -295,8 +338,8 @@ class Visualizer extends Component {
         </div>
         <div className="control-pannel">
           <div className="control-buttons">
-            <button className="controller transparent-button">
-              <span className="text-preview large-text">B</span>
+            <button className="controller transparent-button" onClick={this.changeScale}>
+              <span className="text-preview large-text">{this.state.currentScale}</span>
             </button>
             <button className="controller transparent-button">
               <img src={process.env.PUBLIC_URL + '/resources/guitar-instrument.png'} alt="Instrumento" className="large-icon" />
