@@ -13,7 +13,9 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
+    "react-soundfont-player": "^1.0.2",
     "sass": "^1.79.4",
+    "tone": "^15.0.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { supabase } from './supabaseConfig';
+import Soundfont from 'soundfont-player';
 import "./styles/Visualizer.css";
 import BubbleSort from './algorithms/BubbleSort.js';
 import MergeSort from './algorithms/MergeSort.js';
@@ -9,7 +10,7 @@ import RadixSort from './algorithms/RadixSort.js';
 import HeapSort from './algorithms/HeapSort.js';
 import SelectionSort from './algorithms/SelectionSort.js';
 import BucketSort from './algorithms/BucketSort.js';
-import GnomeSort from './algorithms/GnomeSort.js'
+import GnomeSort from './algorithms/GnomeSort.js';
 import Bar from './Bar.js';
 
 class Visualizer extends Component {
@@ -28,6 +29,7 @@ class Visualizer extends Component {
     volumeLevel: 100,
     remainingSteps: [],
     isCompleted: false,
+    instrument: null,
   };
 
   ALGORITHMS = {
@@ -39,7 +41,21 @@ class Visualizer extends Component {
     'Heap Sort': HeapSort,
     'Selection Sort': SelectionSort,
     'Bucket Sort': BucketSort,
-    'Gnome Sort': GnomeSort
+    'Gnome Sort': GnomeSort,
+  };
+
+  componentDidMount() {
+    const { id } = this.props;
+    this.fetchSortAlgorithm(id);
+    this.generateRandomArray();
+    this.initializeSoundfont();
+  }
+
+  initializeSoundfont = () => {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    Soundfont.instrument(audioContext, 'electric_guitar_jazz').then(instrument => {
+      this.setState({ instrument });
+    });
   };
 
   fetchSortAlgorithm = async (id) => {
@@ -65,21 +81,51 @@ class Visualizer extends Component {
     });
   };
 
-  componentDidMount() {
-    const { id } = this.props;
-    this.fetchSortAlgorithm(id);
-    this.generateRandomArray();
-  }
-
-  generateRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min);
-  };
-
   clearColorKey = () => {
     let blankKey = new Array(this.state.count).fill(0);
     this.setState({
       colorKey: blankKey,
       colorSteps: [blankKey],
+    });
+  };
+
+  playSound = (note) => {
+    const { instrument, volumeLevel } = this.state;
+    if (instrument) {
+      instrument.play(note, null, { gain: volumeLevel / 100 });
+    }
+  };
+
+  playSteps = (steps, startStep) => {
+    let timeouts = [];
+    for (let i = 0; i < steps.length; i++) {
+      let timeout = setTimeout(() => {
+        let currentStep = startStep + i;
+        if (currentStep < this.state.arraySteps.length) {
+          const newArray = steps[i];
+          const maxVal = Math.max(...newArray);
+          const noteIndex = Math.floor((newArray[0] / maxVal) * 10);
+          const note = ["A3", "B3", "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"][noteIndex];
+
+          this.setState({
+            array: newArray,
+            colorKey: this.state.colorSteps[currentStep],
+            currentStep: currentStep + 1,
+          });
+
+          this.playSound(note);
+        }
+        if (currentStep === this.state.arraySteps.length - 1) {
+          this.setState({
+            isPlaying: false,
+          });
+        }
+      }, (this.state.delay / this.state.speed) * i);
+      timeouts.push(timeout);
+    }
+    this.setState({
+      timeouts: timeouts,
+      isPlaying: true,
     });
   };
 
@@ -100,6 +146,10 @@ class Visualizer extends Component {
     }, this.generateSteps);
   };
 
+  generateRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
   generateSteps = () => {
     if (!this.state.algorithm) return;
     let array = this.state.array.slice();
@@ -115,24 +165,6 @@ class Visualizer extends Component {
     });
   };
 
-  changeArray = (index, value) => {
-    let arr = [...this.state.array];
-    arr[index] = value;
-
-    let colorKey = [...this.state.colorKey];
-    colorKey[index] = 0;
-
-    this.setState(prevState => ({
-      array: arr,
-      arraySteps: [],
-      currentStep: 0,
-      colorKey: colorKey,
-      colorSteps: [],
-    }), () => {
-      this.generateSteps();
-    });
-  };
-
   start = () => {
     let steps = this.state.arraySteps;
     if (steps.length === 0 || this.state.isPlaying) return;
@@ -141,32 +173,6 @@ class Visualizer extends Component {
       remainingSteps: steps.slice(this.state.currentStep),
     }, () => {
       this.playSteps(this.state.remainingSteps, this.state.currentStep);
-    });
-  };
-
-  playSteps = (steps, startStep) => {
-    let timeouts = [];
-    for (let i = 0; i < steps.length; i++) {
-      let timeout = setTimeout(() => {
-        let currentStep = startStep + i;
-        if (currentStep < this.state.arraySteps.length) {
-          this.setState({
-            array: steps[i],
-            colorKey: this.state.colorSteps[currentStep],
-            currentStep: currentStep + 1,
-          });
-        }
-        if (currentStep === this.state.arraySteps.length - 1) {
-          this.setState({
-            isPlaying: false,
-          });
-        }
-      }, (this.state.delay / this.state.speed) * i);
-      timeouts.push(timeout);
-    }
-    this.setState({
-      timeouts: timeouts,
-      isPlaying: true,
     });
   };
 
