@@ -42,23 +42,33 @@ function HowToUse({ onClose }) {
           </div>
           <div className="right-column">
             <div className="instruction">
-              <span className="styled-button">B</span>
+              <div className="icon-container-stroke">
+                <span className="styled-button">B</span>
+              </div>
               <span>Change the notes scale: A, B, C, D, E, F, or G</span>
             </div>
             <div className="instruction">
-              <img src={`${process.env.PUBLIC_URL}/resources/guitar.png`} alt="Instrument Icon" className="icon" />
+              <div className="icon-container-stroke">
+                <img src={`${process.env.PUBLIC_URL}/resources/guitar.png`} alt="Instrument Icon" className="icon" />
+              </div>
               <span>Change the instrument playing</span>
             </div>
             <div className="instruction">
-              <span className="styled-button">1x</span>
+              <div className="icon-container-stroke">
+                <span className="styled-button">1x</span>
+              </div>
               <span>Change the speed of the visualizer</span>
             </div>
             <div className="instruction">
-              <img src={`${process.env.PUBLIC_URL}/resources/mute.png`} alt="Mute Icon" className="icon" />
+              <div className="icon-container-stroke">
+                <img src={`${process.env.PUBLIC_URL}/resources/mute.png`} alt="Mute Icon" className="icon" />
+              </div>
               <span>Use this button to mute the visualizer</span>
             </div>
             <div className="instruction">
-              <img src={`${process.env.PUBLIC_URL}/resources/resources.png`} alt="Resources Icon" className="icon" />
+              <div className="icon-container-stroke resource-button-example">
+                <img src={`${process.env.PUBLIC_URL}/resources/wikipedia.png`} alt="Resource Icon" className="icon" />
+              </div>
               <span>Resources to learn the algorithm</span>
             </div>
           </div>
