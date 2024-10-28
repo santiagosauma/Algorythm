@@ -67,11 +67,12 @@
 }
 
 .instruction {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50px 1fr;
   align-items: center;
   gap: 15px;
   font-size: 1.4rem;
-  min-height: 50px;
+  min-height: 65px;
 }
 
 .icon-container, .icon-container-stroke, .styled-button {
@@ -119,4 +120,9 @@
 .resource-button-example {
   background-color: white;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
 }

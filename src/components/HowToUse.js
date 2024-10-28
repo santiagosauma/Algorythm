@@ -49,7 +49,7 @@ function HowToUse({ onClose }) {
             </div>
             <div className="instruction">
               <div className="icon-container-stroke">
-                <img src={`${process.env.PUBLIC_URL}/resources/guitar.png`} alt="Instrument Icon" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/resources/guitar-instrument.png`} alt="Instrument Icon" className="icon" />
               </div>
               <span>Change the instrument playing</span>
             </div>
