@@ -97,7 +97,7 @@ class Visualizer extends Component {
     if (instrument) {
       instrument.play(note, null, {
         gain: volumeLevel / 100,
-        duration: 0.2, // Shorter duration
+        duration: 0.2,
       });
     }
   };
@@ -128,7 +128,6 @@ class Visualizer extends Component {
           this.setState({
             isPlaying: false,
           }, () => {
-            // Play arpeggio or closing note if instrument is a guitar
             if (this.state.instrumentName.includes('guitar')) {
               this.playClosingNotes();
             }
