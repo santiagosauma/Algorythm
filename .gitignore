@@ -9,7 +9,7 @@
 /coverage
 
 # DataBase
-src/components/.env
+.env
 
 # production
 /build

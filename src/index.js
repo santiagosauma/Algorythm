@@ -8,6 +8,7 @@ import Sorts from './components/Sorts';
 import SortDetails from './components/SortDetail';
 import Visualizer from './components/Visualizer';
 import ComingSoon from './components/ComingSoon';
+<link rel="icon" href="%PUBLIC_URL%/resources/guitar-instrument.png" />
 
 const svgPaths = [
   '/svg/note1.svg',
