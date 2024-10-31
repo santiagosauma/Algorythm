@@ -72,4 +72,3 @@ function mergeSort(array, position, steps, colorSteps) {
   }
   
   export default mergeSort;
-  

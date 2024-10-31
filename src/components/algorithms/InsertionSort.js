@@ -36,4 +36,3 @@ function insertionSort(array, position, steps, colorSteps) {
   }
   
   export default insertionSort;
-  

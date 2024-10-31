@@ -35,4 +35,3 @@ function BubbleSort(array, position, steps, colorSteps) {
   }
   
   export default BubbleSort;
-  

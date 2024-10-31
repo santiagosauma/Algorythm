@@ -56,4 +56,3 @@ function quickSort(array, position, steps, colorSteps) {
   }
   
   export default quickSort;
-  
