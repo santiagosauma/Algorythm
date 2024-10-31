@@ -14,26 +14,40 @@ import GnomeSort from './algorithms/GnomeSort.js';
 import Bar from './Bar.js';
 
 class Visualizer extends Component {
-  state = {
-    array: [],
-    arraySteps: [],
-    colorKey: [],
-    colorSteps: [],
-    currentStep: 0,
-    count: 10,
-    delay: 100,
-    speed: 1,
-    algorithm: '',
-    timeouts: [],
-    isPlaying: false,
-    volumeLevel: 100,
-    remainingSteps: [],
-    isCompleted: false,
-    instrument: null,
-    instrumentName: 'acoustic_guitar_nylon',
-    currentScale: 'C',
-    scales: ['C', 'D'],
-  };
+  constructor(props) {
+    super(props);
+    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    this.state = {
+      array: [],
+      arraySteps: [],
+      colorKey: [],
+      colorSteps: [],
+      currentStep: 0,
+      count: 10,
+      delay: 100,
+      speed: 1,
+      algorithm: '',
+      timeouts: [],
+      isPlaying: false,
+      volumeLevel: 100,
+      remainingSteps: [],
+      isCompleted: false,
+      instrument: null,
+      instrumentLoading: false,
+      instrumentIndex: 0,
+      instruments: [
+        { name: 'acoustic_grand_piano', image: '/resources/piano.png' },
+        { name: 'acoustic_guitar_nylon', image: '/resources/guitar.png' },
+        { name: 'violin', image: '/resources/violin.png' },
+        { name: 'acoustic_bass', image: '/resources/bass.png' },
+        { name: 'alto_sax', image: '/resources/saxophone.png' },
+        { name: 'trumpet', image: '/resources/trumpet.png' },
+      ],
+      currentScale: 'C',
+      scales: ['C', 'D', 'E', 'F'],
+      noteCounter: 0,
+    };
+  }
 
   ALGORITHMS = {
     'Bubble Sort': BubbleSort,
@@ -55,10 +69,17 @@ class Visualizer extends Component {
   }
 
   initializeSoundfont = () => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    Soundfont.instrument(audioContext, this.state.instrumentName).then(instrument => {
-      this.setState({ instrument });
-    });
+    const { instruments, instrumentIndex } = this.state;
+    const instrumentName = instruments[instrumentIndex].name;
+    this.setState({ instrumentLoading: true });
+    Soundfont.instrument(this.audioContext, instrumentName)
+      .then(instrument => {
+        this.setState({ instrument, instrumentLoading: false });
+      })
+      .catch(error => {
+        console.error('Error loading instrument:', error);
+        this.setState({ instrumentLoading: false });
+      });
   };
 
   fetchSortAlgorithm = async (id) => {
@@ -96,31 +117,35 @@ class Visualizer extends Component {
     const { instrument, volumeLevel } = this.state;
     if (instrument) {
       instrument.play(note, null, {
-        gain: volumeLevel / 100,
-        duration: 0.2,
+        gain: (volumeLevel / 100) * 1.5,
+        duration: 0.3,
       });
+    } else {
+      console.warn('Instrument not loaded yet');
     }
   };
 
   playSteps = (steps, startStep) => {
+    if (!this.state.instrument) {
+      console.warn('Instrument not loaded yet');
+      return;
+    }
     let timeouts = [];
     for (let i = 0; i < steps.length; i++) {
       let timeout = setTimeout(() => {
         let currentStep = startStep + i;
         if (currentStep < this.state.arraySteps.length) {
           const newArray = steps[i];
-          const maxVal = Math.max(...newArray);
-          const normalizedValue = newArray[0] / maxVal;
-
           const scaleNotes = this.getScaleNotes();
-          const noteIndex = Math.floor(normalizedValue * (scaleNotes.length - 1));
+          const noteIndex = this.state.noteCounter % scaleNotes.length;
           const note = scaleNotes[noteIndex];
 
-          this.setState({
+          this.setState(prevState => ({
+            noteCounter: prevState.noteCounter + 1,
             array: newArray,
             colorKey: this.state.colorSteps[currentStep],
             currentStep: currentStep + 1,
-          });
+          }));
 
           this.playSound(note);
         }
@@ -128,7 +153,8 @@ class Visualizer extends Component {
           this.setState({
             isPlaying: false,
           }, () => {
-            if (this.state.instrumentName.includes('guitar')) {
+            const currentInstrument = this.state.instruments[this.state.instrumentIndex].name;
+            if (currentInstrument.includes('guitar')) {
               this.playClosingNotes();
             }
           });
@@ -145,8 +171,10 @@ class Visualizer extends Component {
   getScaleNotes = () => {
     const { currentScale } = this.state;
     const scales = {
-      'C': ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4'],
-      'D': ['D3', 'E3', 'F#3', 'G3', 'A3', 'B3', 'C#4', 'D4'],
+      'C': ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'],
+      'D': ['D4', 'E4', 'F#4', 'G4', 'A4', 'B4', 'C#5', 'D5'],
+      'E': ['E4', 'F#4', 'G#4', 'A4', 'B4', 'C#5', 'D#5', 'E5'],
+      'F': ['F4', 'G4', 'A4', 'A#4', 'C5', 'D5', 'E5', 'F5'],
     };
     return scales[currentScale] || scales['C'];
   };
@@ -156,9 +184,9 @@ class Visualizer extends Component {
     const arpeggioNotes = this.getScaleNotes();
     let delay = 0;
     arpeggioNotes.forEach((note) => {
-      instrument.play(note, instrument.context.currentTime + delay, {
-        gain: volumeLevel / 100,
-        duration: 0.2,
+      instrument.play(note, this.audioContext.currentTime + delay, {
+        gain: (volumeLevel / 100) * 1.5,
+        duration: 0.3,
       });
       delay += 0.1;
     });
@@ -178,6 +206,7 @@ class Visualizer extends Component {
       currentStep: 0,
       colorKey: new Array(count).fill(0),
       colorSteps: [],
+      noteCounter: 0,
     }, this.generateSteps);
   };
 
@@ -202,10 +231,11 @@ class Visualizer extends Component {
 
   start = () => {
     let steps = this.state.arraySteps;
-    if (steps.length === 0 || this.state.isPlaying) return;
+    if (steps.length === 0 || this.state.isPlaying || !this.state.instrument) return;
     this.clearTimeouts();
     this.setState({
       remainingSteps: steps.slice(this.state.currentStep),
+      noteCounter: 0,
     }, () => {
       this.playSteps(this.state.remainingSteps, this.state.currentStep);
     });
@@ -295,7 +325,20 @@ class Visualizer extends Component {
     this.setState({ currentScale: scales[nextIndex] });
   };
 
+  changeInstrument = () => {
+    const { instruments, instrumentIndex, instrument } = this.state;
+    const nextIndex = (instrumentIndex + 1) % instruments.length;
+    if (instrument && instrument.stop) {
+      instrument.stop();
+    }
+    this.clearTimeouts();
+    this.setState({ instrument: null, instrumentIndex: nextIndex }, () => {
+      this.initializeSoundfont();
+    });
+  };
+
   render() {
+    const { instruments, instrumentIndex, instrumentLoading } = this.state;
     let bars = this.state.array.map((value, index) => {
       return (
         <Bar
@@ -324,7 +367,11 @@ class Visualizer extends Component {
       );
     } else {
       playButton = (
-        <button className="controller central" onClick={this.start}>
+        <button
+          className="controller central"
+          onClick={this.start}
+          disabled={!this.state.instrument || instrumentLoading}
+        >
           <img src={process.env.PUBLIC_URL + '/resources/play-button-arrowhead.png'} alt="Play" />
         </button>
       );
@@ -340,8 +387,12 @@ class Visualizer extends Component {
             <button className="controller transparent-button" onClick={this.changeScale}>
               <span className="text-preview large-text">{this.state.currentScale}</span>
             </button>
-            <button className="controller transparent-button">
-              <img src={process.env.PUBLIC_URL + '/resources/guitar-instrument.png'} alt="Instrumento" className="large-icon" />
+            <button className="controller transparent-button" onClick={this.changeInstrument}>
+              <img
+                src={process.env.PUBLIC_URL + instruments[instrumentIndex].image}
+                alt="Instrumento"
+                className="large-icon"
+              />
             </button>
             <button className="controller previous central" onClick={this.previousStep}>
               <img src={process.env.PUBLIC_URL + '/resources/next.png'} alt="Previous" />
