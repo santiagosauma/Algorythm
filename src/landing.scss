@@ -83,15 +83,15 @@ body {
   stroke: transparent;
 }
 
-$total: 10; // Cantidad de SVGs en pantalla
-$min-separation: 10%; // Mínima separación entre SVGs en la pantalla
+$total: 10;
+$min-separation: 10%;
 
 @for $i from 1 through $total {
-  $scale: 0.6 + random() * 1.6; // Tamaño de los SVGs
-  $left-position: ($i - 1) * (100% / $total) + random($min-separation); // Posición calculada para evitar superposición
+  $scale: 0.6 + random() * 1.6;
+  $left-position: ($i - 1) * (100% / $total) + random($min-separation);
   
   .svg-container:nth-child(#{$i}) {
-    left: $left-position; // Posición única para cada elemento
+    left: $left-position;
     animation: raise#{$i} 10 + random(20) + s linear infinite;
     animation-delay: random(10) - 5 + s;
     transform: scale($scale) rotate(random(360) + deg);

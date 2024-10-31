@@ -1,0 +1,22 @@
+.responsive-notice {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-color: #3b3d54;
+  }
+  
+  .responsive-notice h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .responsive-notice p {
+    font-size: 1.2rem;
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 1rem;
+  }  
