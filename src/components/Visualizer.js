@@ -37,10 +37,10 @@ class Visualizer extends Component {
       instrumentIndex: 0,
       instruments: [
         { name: 'acoustic_grand_piano', image: '/resources/piano.png' },
-        { name: 'acoustic_guitar_nylon', image: '/resources/guitar.png' },
+        { name: 'acoustic_guitar_nylon', image: '/resources/guitar-instrument.png' },
         { name: 'violin', image: '/resources/violin.png' },
-        { name: 'acoustic_bass', image: '/resources/bass.png' },
-        { name: 'alto_sax', image: '/resources/saxophone.png' },
+        { name: 'bassoon', image: '/resources/bassoon.png' },
+        { name: 'marimba', image: '/resources/marimba.png' },
         { name: 'trumpet', image: '/resources/trumpet.png' },
       ],
       currentScale: 'C',
@@ -153,10 +153,7 @@ class Visualizer extends Component {
           this.setState({
             isPlaying: false,
           }, () => {
-            const currentInstrument = this.state.instruments[this.state.instrumentIndex].name;
-            if (currentInstrument.includes('guitar')) {
-              this.playClosingNotes();
-            }
+            this.playClosingNotes();
           });
         }
       }, (this.state.delay / this.state.speed) * i);
@@ -174,7 +171,7 @@ class Visualizer extends Component {
       'C': ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'],
       'D': ['D4', 'E4', 'F#4', 'G4', 'A4', 'B4', 'C#5', 'D5'],
       'E': ['E4', 'F#4', 'G#4', 'A4', 'B4', 'C#5', 'D#5', 'E5'],
-      'F': ['F4', 'G4', 'A4', 'A#4', 'C5', 'D5', 'E5', 'F5'],
+      'F': ['F4', 'G4', 'A4', 'Bb4', 'C5', 'D5', 'E5', 'F5'],
     };
     return scales[currentScale] || scales['C'];
   };
