@@ -41,7 +41,7 @@
   font-weight: 400;
   color: white;
   margin: 0;
-  margin-left: 1vw;
+  margin-left: 0.4vw;
   text-align: left;
 }
 
@@ -78,6 +78,7 @@
 .content {
   display: flex;
   margin: 20px;
+  margin-left: 0px;
   gap: 20px;
 }
 

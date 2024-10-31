@@ -6900,6 +6900,11 @@ micromatch@^4.0.2, micromatch@^4.0.4, micromatch@^4.0.5:
     braces "^3.0.3"
     picomatch "^2.3.1"
 
+midi-message@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/midi-message/-/midi-message-0.0.1.tgz#566c44332899c3fbe17abe8f43761a5edbba11f3"
+  integrity sha512-eG4KEgTzAWByYZNk/WqiYcr8Xfy9iWZELvP5s9e5NlwJlARspoq7WitcxXAd9d+jw/y3um1G78DvNf6gjaoDLA==
+
 midimessage@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/midimessage/-/midimessage-1.0.5.tgz#ad99f04d863a053a2563d553c5bf35070b48802c"
@@ -8883,7 +8888,7 @@ sockjs@^0.3.24:
     uuid "^8.3.2"
     websocket-driver "^0.7.4"
 
-"soundfont-player@github:danigb/soundfont-player":
+soundfont-player@danigb/soundfont-player:
   version "0.12.0"
   resolved "https://codeload.github.com/danigb/soundfont-player/tar.gz/2b89587d7cc396c5c7b91056f8cb78831ead7436"
   dependencies:
