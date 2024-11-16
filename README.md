@@ -74,7 +74,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 ## Author ✍️
 
-<table>
+<table align="center">
   <tr>
     <td align="center">
       <a href="https://github.com/santiagosauma">
@@ -84,6 +84,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
       <br />
       <a style="padding-top: 40px;" href="https://github.com/santiagosauma" title="GitHub"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"></a>
       <a href="https://www.linkedin.com/in/santiagosauma/" title="LinkedIn"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+      <a href="mailto:lssaumap@gmail.com" title="Mail"><img src="https://img.shields.io/badge/Mail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
     </td>
   </tr>
 </table>
