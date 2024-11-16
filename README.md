@@ -24,7 +24,7 @@
 
 # Algorythm 🎶
 
-[![Algorythm Screenshot][product-screenshot]](https://example.com)
+[![Algorythm Screenshot][product-screenshot]](https://algorythm-three.vercel.app)
 
 Algorythm is a unique and interactive educational app that combines **algorithm visualizations with music** 🎵 to make learning data structures and algorithms an engaging and multisensory experience. This platform not only helps users understand complex sorting algorithms but also adds a creative layer by turning these algorithms into music!
 
@@ -102,7 +102,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: public\resources\Project_Screenshot.png
+[product-screenshot]: public/resources/Project_Screenshot.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [JavaScript.js]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
