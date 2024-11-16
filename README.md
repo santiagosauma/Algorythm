@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="public/resources/guitar-instrument.png" alt="Logo" width="120" height="120">
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <h3 align="center">Algorythm</h3>
 
-## Available Scripts
+  <p align="center">
+    Discover algorithms through interactive visuals and music, making learning both fun and engaging!
+    <br />
+    <br />
+    <br />
+    <a href="INSERTAR_DEMO">View Demo</a>
+    ·
+    <a href="https://github.com/santiagosauma/Algorythm/issues/new">Report Bug</a>
+    ·
+    <a href="https://algorythm-three.vercel.app">Website</a>
+  </p>
+</div>
 
-In the project directory, you can run:
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Algorythm 🎶
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[![Algorythm Screenshot][product-screenshot]](https://example.com)
 
-### `yarn test`
+Algorythm is a unique and interactive educational app that combines **algorithm visualizations with music** 🎵 to make learning data structures and algorithms an engaging and multisensory experience. This platform not only helps users understand complex sorting algorithms but also adds a creative layer by turning these algorithms into music!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Key Features 🌟
 
-### `yarn build`
+- 🎨 **Interactive Visualizations**: Step-by-step visualizations for each algorithm show how the sorting and data manipulation processes unfold, enhancing comprehension through visuals.
+- 🎶 **Musical Feedback**: Each step in the algorithm generates musical notes, allowing users to experience algorithms both visually and audibly. Choose from a variety of instruments 🎷🎸🎻 and customize the scale and pitch to make each algorithm unique.
+- 🎚️ **Control Options**: Adjust the volume, playback speed, and toggle between **step-by-step** or continuous modes, letting you personalize your learning experience to fit your pace and style.
+- 📖 **Detailed Explanations**: Each algorithm includes thorough explanations covering its functionality, complexity, and real-world applications, giving users a well-rounded understanding.
+- 🌐 **Multi-Language Support**: Code examples are available in several programming languages, including Python, JavaScript, and C++.
+- 🎼 **Instrument and Scale Selection**: Users can select different musical scales and instruments, adding another dimension of interactivity to the learning experience.
+- 📝 **Practice Mode**: Users can test their knowledge and sharpen their skills by completing exercises on algorithms and data structures. *(Coming Soon)* 🛠️
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Algorythm is designed for students, developers, and anyone interested in algorithms, combining education with creativity. Its innovative approach makes learning algorithms a fully immersive experience, blending visuals, sound, and interactivity into a tool that’s both educational and fun.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Built With ⚙️
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project was built using the following technologies:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [![React][React.js]][React-url]
+- [![JavaScript][JavaScript.js]][JavaScript-url]
+- ![SCSS][SCSS]
+- ![Supabase][Supabase]
+- ![SQL][SQL]
+- ![Vercel][Vercel]
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+<!-- 
+## Roadmap
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [x] Add Changelog
+- [x] Add back to top links
+- [ ] Add Additional Templates w/ Examples
+- [ ] Add "components" document to easily copy & paste sections of the readme
+- [ ] Multi-language Support
+    - [ ] Chinese
+    - [ ] Spanish
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
-### Code Splitting
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+-->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Author ✍️
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/santiagosauma">
+        <img src="https://avatars.githubusercontent.com/santiagosauma" width="100px;" alt=""/>
+        <br /><sub><b>Luis Santiago Sauma Peñaloza</b></sub>
+      </a>
+      <br />
+      <a style="padding-top: 40px;" href="https://github.com/santiagosauma" title="GitHub"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"></a>
+      <a href="https://www.linkedin.com/in/santiagosauma/" title="LinkedIn"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+    </td>
+  </tr>
+</table>
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
 
-### Advanced Configuration
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+[🔼 Back to top](#readme-top)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: public\resources\Project_Screenshot.png
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[JavaScript.js]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
+[JavaScript-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[SCSS]: https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white
+[Supabase]: https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white
+[SQL]: https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=database&logoColor=white
+[Vercel]: https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white
